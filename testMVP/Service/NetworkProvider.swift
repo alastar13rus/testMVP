@@ -17,14 +17,14 @@ class NetworkProvider: UseCaseProvider {
     }
     
     
-    func fetchFirstPosts(first: Int, orderBy: Sorting, completion: @escaping (Result<PostListResponse, Error>) -> Void) {
+    func fetchFirstPosts(_ request: Request, completion: @escaping (Result<PostListResponse, Error>) -> Void) {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = Self.baseURL
         urlComponents.path = "/posts"
         urlComponents.queryItems = [
-            .init(name: "first", value: "\(first)"),
-            .init(name: "orderBy", value: "\(orderBy)")
+            .init(name: "first", value: "\(request.first)"),
+            .init(name: "orderBy", value: request.orderBy.rawValue)
         ]
 
         guard let url = urlComponents.url else {
@@ -35,15 +35,21 @@ class NetworkProvider: UseCaseProvider {
         networkAgent.request(url) { completion($0) }
     }
     
-    func fetchAfterPosts(first: Int, after: Cursor, orderBy: Sorting, completion: @escaping (Result<PostListResponse, Error>) -> Void) {
+    func fetchAfterPosts(_ request: Request, completion: @escaping (Result<PostListResponse, Error>) -> Void) {
+        
+        guard let after = request.after else {
+            completion(.failure(CustomError.missingRequestParams))
+            return
+        }
+        
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = Self.baseURL
         urlComponents.path = "/posts"
         urlComponents.queryItems = [
-            .init(name: "first", value: "\(first)"),
-            .init(name: "after", value: "\(after)"),
-            .init(name: "orderBy", value: "\(orderBy)")
+            .init(name: "first", value: "\(request.first)"),
+            .init(name: "after", value: after),
+            .init(name: "orderBy", value: request.orderBy.rawValue)
         ]
 
         guard let url = urlComponents.url else {
