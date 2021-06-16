@@ -9,7 +9,7 @@ import Foundation
 
 class NetworkProvider: UseCaseProvider {
     
-    static let baseURL = "k8s-stage.apianon.ru/posts/v1"
+    static let baseURL = "k8s-stage.apianon.ru"
     let networkAgent: NetworkAgent
     
     init(networkAgent: NetworkAgent) {
@@ -21,7 +21,7 @@ class NetworkProvider: UseCaseProvider {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = Self.baseURL
-        urlComponents.path = "/posts"
+        urlComponents.path = "/posts/v1/posts"
         urlComponents.queryItems = [
             .init(name: "first", value: "\(request.first)"),
             .init(name: "orderBy", value: request.orderBy.rawValue)
@@ -45,7 +45,7 @@ class NetworkProvider: UseCaseProvider {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = Self.baseURL
-        urlComponents.path = "/posts"
+        urlComponents.path = "/posts/v1/posts"
         urlComponents.queryItems = [
             .init(name: "first", value: "\(request.first)"),
             .init(name: "after", value: after),
