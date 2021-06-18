@@ -19,6 +19,15 @@
 		BBDF7CF7267965B000539526 /* NetworkAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CF6267965B000539526 /* NetworkAgent.swift */; };
 		BBDF7CFB267973E900539526 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CFA267973E900539526 /* CustomError.swift */; };
 		BBDF7CFE2679742600539526 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CFD2679742600539526 /* Request.swift */; };
+		BBDF7D022679987800539526 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D012679987800539526 /* PostTableViewCell.swift */; };
+		BBDF7D07267999F500539526 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D06267999F500539526 /* PostData.swift */; };
+		BBDF7D0F2679EF6900539526 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D0E2679EF6900539526 /* Date+Extension.swift */; };
+		BBDF7D122679FFD500539526 /* PostAudioCoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D112679FFD500539526 /* PostAudioCoverTableViewCell.swift */; };
+		BBDF7D152679FFE800539526 /* PostPlainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D142679FFE800539526 /* PostPlainTableViewCell.swift */; };
+		BBDF7D18267A02A300539526 /* PostPlainCoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D17267A02A300539526 /* PostPlainCoverTableViewCell.swift */; };
+		BBDF7D1B267A0CCB00539526 /* PostImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D1A267A0CCB00539526 /* PostImageTableViewCell.swift */; };
+		BBDF7D1E267A0D2100539526 /* PostVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D1D267A0D2100539526 /* PostVideoTableViewCell.swift */; };
+		BBDF7D21267A0FC700539526 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D20267A0FC700539526 /* URL+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +45,15 @@
 		BBDF7CF6267965B000539526 /* NetworkAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAgent.swift; sourceTree = "<group>"; };
 		BBDF7CFA267973E900539526 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		BBDF7CFD2679742600539526 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		BBDF7D012679987800539526 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		BBDF7D06267999F500539526 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
+		BBDF7D0E2679EF6900539526 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		BBDF7D112679FFD500539526 /* PostAudioCoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAudioCoverTableViewCell.swift; sourceTree = "<group>"; };
+		BBDF7D142679FFE800539526 /* PostPlainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPlainTableViewCell.swift; sourceTree = "<group>"; };
+		BBDF7D17267A02A300539526 /* PostPlainCoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPlainCoverTableViewCell.swift; sourceTree = "<group>"; };
+		BBDF7D1A267A0CCB00539526 /* PostImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageTableViewCell.swift; sourceTree = "<group>"; };
+		BBDF7D1D267A0D2100539526 /* PostVideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVideoTableViewCell.swift; sourceTree = "<group>"; };
+		BBDF7D20267A0FC700539526 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +86,7 @@
 		BBDF7CC0267947B800539526 /* testMVP */ = {
 			isa = PBXGroup;
 			children = (
+				BBDF7D0D2679EF6100539526 /* Extensions */,
 				BBDF7CF9267973CF00539526 /* Helpers */,
 				BBDF7CEF267961CE00539526 /* Service */,
 				BBDF7CCF267947C100539526 /* Info.plist */,
@@ -83,7 +102,8 @@
 		BBDF7CE0267952D100539526 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BBDF7CEC267957EE00539526 /* Post.swift */,
+				BBDF7D05267999BD00539526 /* Data */,
+				BBDF7D042679999400539526 /* DataTransferObject */,
 				BBDF7CFD2679742600539526 /* Request.swift */,
 			);
 			path = Model;
@@ -108,6 +128,7 @@
 		BBDF7CE32679531100539526 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BBDF7D002679987100539526 /* Cell */,
 				BBDF7CC5267947B800539526 /* PostListViewController.swift */,
 			);
 			path = View;
@@ -139,6 +160,44 @@
 				BBDF7CFA267973E900539526 /* CustomError.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BBDF7D002679987100539526 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BBDF7D012679987800539526 /* PostTableViewCell.swift */,
+				BBDF7D112679FFD500539526 /* PostAudioCoverTableViewCell.swift */,
+				BBDF7D142679FFE800539526 /* PostPlainTableViewCell.swift */,
+				BBDF7D17267A02A300539526 /* PostPlainCoverTableViewCell.swift */,
+				BBDF7D1A267A0CCB00539526 /* PostImageTableViewCell.swift */,
+				BBDF7D1D267A0D2100539526 /* PostVideoTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		BBDF7D042679999400539526 /* DataTransferObject */ = {
+			isa = PBXGroup;
+			children = (
+				BBDF7CEC267957EE00539526 /* Post.swift */,
+			);
+			path = DataTransferObject;
+			sourceTree = "<group>";
+		};
+		BBDF7D05267999BD00539526 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BBDF7D06267999F500539526 /* PostData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		BBDF7D0D2679EF6100539526 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BBDF7D0E2679EF6900539526 /* Date+Extension.swift */,
+				BBDF7D20267A0FC700539526 /* URL+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,15 +270,24 @@
 			files = (
 				BBDF7CDE26794D2900539526 /* PostListPresenter.swift in Sources */,
 				BBDF7CE82679542800539526 /* PostListRouter.swift in Sources */,
+				BBDF7D18267A02A300539526 /* PostPlainCoverTableViewCell.swift in Sources */,
 				BBDF7CC6267947B800539526 /* PostListViewController.swift in Sources */,
 				BBDF7CED267957EE00539526 /* Post.swift in Sources */,
+				BBDF7D152679FFE800539526 /* PostPlainTableViewCell.swift in Sources */,
+				BBDF7D07267999F500539526 /* PostData.swift in Sources */,
 				BBDF7CFE2679742600539526 /* Request.swift in Sources */,
+				BBDF7D122679FFD500539526 /* PostAudioCoverTableViewCell.swift in Sources */,
+				BBDF7D1B267A0CCB00539526 /* PostImageTableViewCell.swift in Sources */,
 				BBDF7CC2267947B800539526 /* AppDelegate.swift in Sources */,
 				BBDF7CFB267973E900539526 /* CustomError.swift in Sources */,
 				BBDF7CF42679648F00539526 /* NetworkProvider.swift in Sources */,
+				BBDF7D21267A0FC700539526 /* URL+Extension.swift in Sources */,
+				BBDF7D0F2679EF6900539526 /* Date+Extension.swift in Sources */,
 				BBDF7CC4267947B800539526 /* SceneDelegate.swift in Sources */,
 				BBDF7CF1267961E000539526 /* UseCaseProvider.swift in Sources */,
 				BBDF7CF7267965B000539526 /* NetworkAgent.swift in Sources */,
+				BBDF7D022679987800539526 /* PostTableViewCell.swift in Sources */,
+				BBDF7D1E267A0D2100539526 /* PostVideoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

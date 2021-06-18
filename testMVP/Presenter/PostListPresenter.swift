@@ -9,7 +9,7 @@ import Foundation
 
 protocol PostListPresenterProtocol: class {
     
-    
+    func didFetchTriggerFired()
     
 }
 
@@ -21,10 +21,14 @@ class PostListPresenter: PostListPresenterProtocol {
     let useCaseProvider: UseCaseProvider
     weak var delegate: PostListView?
     
-    var posts = [Post]()
+    var posts = [PostData]() {
+        didSet {
+            delegate?.updateData()
+        }
+    }
     var currentCursor: Cursor? = nil
     let first = 20
-    let sorting: Sorting = .createdAt
+    let sorting: Sorting = .mostPopular
     
     
 //    MARK: - Init
@@ -35,7 +39,11 @@ class PostListPresenter: PostListPresenterProtocol {
     
     
 //    MARK: - Methods
-    func fetch() {
+    func didFetchTriggerFired() {
+        fetch()
+    }
+    
+    private func fetch() {
         
         guard let cursor = currentCursor else {
             let request = Request(first: first, after: nil, orderBy: sorting)
@@ -47,11 +55,12 @@ class PostListPresenter: PostListPresenterProtocol {
         useCaseProvider.fetchAfterPosts(request) { [weak self] in self?.handle($0) }
     }
     
-    func handle(_ result: Result<PostListResponse, Error>) {
+    private func handle(_ result: Result<PostListResponse, Error>) {
         switch result {
         case .success(let response):
             self.currentCursor = response.data.cursor
-            self.posts = response.data.items
+            self.posts = response.data.items.map { PostData($0) }
+            print(posts.count)
             
         case .failure(let error):
             fatalError(error.localizedDescription)
