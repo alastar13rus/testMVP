@@ -11,7 +11,7 @@ import AVKit
 class PostAudioCoverTableViewCell: PostTableViewCell {
     
 //    MARK: - Properties
-    let coverImageView: UIImageView = {
+    let audioCoverImageView: UIImageView = {
         let iv = UIImageView()
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
@@ -32,8 +32,8 @@ class PostAudioCoverTableViewCell: PostTableViewCell {
         override func prepareForReuse() {
             super.prepareForReuse()
             
-            coverImageView.image = nil
-//            coverImageView.removeFromSuperview()
+            audioCoverImageView.image = nil
+//            audioCoverImageView.removeFromSuperview()
 //            durationLabel.removeFromSuperview()
         }
     
@@ -47,8 +47,11 @@ class PostAudioCoverTableViewCell: PostTableViewCell {
         durationLabel.text = data.audioContent?.duration ?? ""
         if let url = data.imageContentURL {
             url.downloadImageData { [weak self] (imageData) in
-                guard let self = self, let imageData = imageData else { return }
-                self.coverImageView.image = UIImage(data: imageData)
+                guard let self = self else { return }
+                guard let imageData = imageData else {
+                    return
+                }
+                self.audioCoverImageView.image = UIImage(data: imageData)
             }
         }
     }
@@ -56,22 +59,23 @@ class PostAudioCoverTableViewCell: PostTableViewCell {
     override func setupHierarhy() {
         super.setupHierarhy()
         
-        postContentView.addSubview(coverImageView)
-        coverImageView.addSubview(durationLabel)
+        postContentView.addSubview(audioCoverImageView)
+        audioCoverImageView.addSubview(durationLabel)
     }
     
     override func setupConstraints(_ data: PostData) {
         super.setupConstraints(data)
         
         NSLayoutConstraint.activate([
-            coverImageView.topAnchor.constraint(equalTo: textContentLabel.bottomAnchor, constant: 12),
-            coverImageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
-            coverImageView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
-            coverImageView.heightAnchor.constraint(equalToConstant: 100),
-            coverImageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor),
             
-            durationLabel.centerXAnchor.constraint(equalTo: coverImageView.centerXAnchor),
-            durationLabel.centerYAnchor.constraint(equalTo: coverImageView.centerYAnchor),
+            audioCoverImageView.topAnchor.constraint(equalTo: textContentLabel.bottomAnchor, constant: 12),
+            audioCoverImageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
+            audioCoverImageView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
+            audioCoverImageView.heightAnchor.constraint(equalToConstant: 100),
+            audioCoverImageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor),
+            
+            durationLabel.centerXAnchor.constraint(equalTo: audioCoverImageView.centerXAnchor),
+            durationLabel.centerYAnchor.constraint(equalTo: audioCoverImageView.centerYAnchor),
             
         ])
     }

@@ -51,7 +51,7 @@ class PostTableViewCell: UITableViewCell {
     let activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(style: .large)
         activity.startAnimating()
-        activity.isHidden = false
+        activity.hidesWhenStopped = true
         activity.color = .systemBlue
         activity.translatesAutoresizingMaskIntoConstraints = false
         return activity
@@ -253,18 +253,18 @@ class PostTableViewCell: UITableViewCell {
             url.downloadImageData { [weak self] (imageData) in
                 
                 guard let self = self else { return }
+                self.activityIndicator.stopAnimating()
                 
                 guard let imageData = imageData else {
                     self.authorImageView.image = data.authorGender.getImage()
                     return
                 }
                 
-                self.activityIndicator.isHidden = true
                 self.authorImageView.image = UIImage(data: imageData)
             }
         } else {
-            
-            self.activityIndicator.isHidden = true
+
+            self.activityIndicator.stopAnimating()
             authorImageView.image = data.authorGender.getImage()
         }
     }
