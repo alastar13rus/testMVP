@@ -15,7 +15,6 @@ enum PostType: String, Decodable {
     case plain = "PLAIN"
     case plainCover = "PLAIN_COVER"
     case audioCover = "AUDIO_COVER"
-    case image = "IMAGE"
     case video = "VIDEO"
 
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct ContentVariantHeight {
-    static let textHeight = 20
+    static let textHeight = 0
     static let imageHeight = 100
     static let imageGifHeight = 100
     static let audioHeight = 0
@@ -147,7 +147,7 @@ struct PostData {
         }.joined(separator: " ,")
         
         self.authorName = model.author?.name
-        self.authorPhotoURL = model.author?.photo?.data.small?.url
+        self.authorPhotoURL = model.author?.photo?.data.small?.url ?? model.author?.photo?.data.extraSmall?.url
         self.authorGender = model.author?.gender
         
     }

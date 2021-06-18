@@ -65,8 +65,8 @@ class PostVideoTableViewCell: PostTableViewCell {
         
         NSLayoutConstraint.activate([
             previewImageView.topAnchor.constraint(equalTo: textContentLabel.bottomAnchor, constant: 12),
-            previewImageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
-            previewImageView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
+            previewImageView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
+            previewImageView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -12),
             previewImageView.heightAnchor.constraint(equalToConstant: 100),
             previewImageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor),
             

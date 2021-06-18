@@ -26,4 +26,12 @@ extension UITableView {
         
         self.endUpdates()
     }
+    
+    func calculateTextLabelHeight(withContent content: String, font: UIFont) -> CGFloat {
+        let stringSize = CGSize(width: self.bounds.width, height: .greatestFiniteMagnitude)
+        let string = NSAttributedString(string: content, attributes: [.font: font])
+        let stringBox = string.boundingRect(with: stringSize, options: .usesLineFragmentOrigin, context: nil)
+        
+        return stringBox.height
+    }
 }

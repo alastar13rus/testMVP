@@ -51,7 +51,7 @@ class PostTableViewCell: UITableViewCell {
     let activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(style: .large)
         activity.startAnimating()
-        activity.isHidden = false
+        activity.hidesWhenStopped = true
         activity.color = .systemBlue
         activity.translatesAutoresizingMaskIntoConstraints = false
         return activity
@@ -181,18 +181,18 @@ class PostTableViewCell: UITableViewCell {
         textContentLabelBottomConstraint.priority = .defaultLow
 
         NSLayoutConstraint.activate([
-            postHeaderView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 12),
-            postHeaderView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
-            postHeaderView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
+            postHeaderView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 12),
+            postHeaderView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
+            postHeaderView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -12),
             
             postContentView.topAnchor.constraint(equalTo: postHeaderView.bottomAnchor, constant: 12),
-            postContentView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
-            postContentView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
+            postContentView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
+            postContentView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -12),
             
 //            postFooterView.topAnchor.constraint(equalTo: postContentView.bottomAnchor, constant: 12),
-            postFooterView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
-            postFooterView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
-            postFooterView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            postFooterView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
+            postFooterView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -12),
+            postFooterView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -12),
             
             activityIndicator.topAnchor.constraint(equalTo: postHeaderView.topAnchor),
             activityIndicator.leftAnchor.constraint(equalTo: postHeaderView.leftAnchor),
@@ -228,10 +228,10 @@ class PostTableViewCell: UITableViewCell {
 //
 //
 //            postTypeLabel.topAnchor.constraint(equalTo: isMyFavoriteLabel.bottomAnchor),
-//            postTypeLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
+//            postTypeLabel.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
 //
 //            postContents.topAnchor.constraint(equalTo: postTypeLabel.bottomAnchor),
-//            postContents.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
+//            postContents.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
         ])
     }
     
@@ -253,18 +253,18 @@ class PostTableViewCell: UITableViewCell {
             url.downloadImageData { [weak self] (imageData) in
                 
                 guard let self = self else { return }
+                self.activityIndicator.stopAnimating()
                 
                 guard let imageData = imageData else {
                     self.authorImageView.image = data.authorGender.getImage()
                     return
                 }
                 
-                self.activityIndicator.isHidden = true
                 self.authorImageView.image = UIImage(data: imageData)
             }
         } else {
-            
-            self.activityIndicator.isHidden = true
+
+            self.activityIndicator.stopAnimating()
             authorImageView.image = data.authorGender.getImage()
         }
     }
