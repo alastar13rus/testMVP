@@ -9,8 +9,15 @@ import Foundation
 
 protocol PostListPresenterProtocol: class {
     
-    func didFetchTriggerFired()
+    func didFirstPageTriggerFired()
+    func didNextPageTriggerFired()
     
+}
+
+struct State {
+    var perPage: Int
+    var currentCursor: String?
+    var sorting: Sorting
 }
 
 class PostListPresenter: PostListPresenterProtocol {
@@ -23,12 +30,12 @@ class PostListPresenter: PostListPresenterProtocol {
     
     var posts = [PostData]() {
         didSet {
-            delegate?.updateData()
+            print(posts.count)
+            delegate?.updateData(newList: posts, oldList: oldValue)
         }
     }
-    var currentCursor: Cursor? = nil
-    let first = 20
-    let sorting: Sorting = .mostPopular
+    
+    var state = State(perPage: 10, currentCursor: nil, sorting: .mostPopular)
     
     
 //    MARK: - Init
@@ -39,31 +46,31 @@ class PostListPresenter: PostListPresenterProtocol {
     
     
 //    MARK: - Methods
-    func didFetchTriggerFired() {
-        fetch()
+    func didFirstPageTriggerFired() {
+        let request = Request(first: state.perPage, after: nil, orderBy: state.sorting)
+        useCaseProvider.fetchFirstPosts(request) { [weak self] in self?.handle($0, isReplace: true) }
     }
     
-    private func fetch() {
-        
-        guard let cursor = currentCursor else {
-            let request = Request(first: first, after: nil, orderBy: sorting)
-            useCaseProvider.fetchFirstPosts(request) { [weak self] in self?.handle($0) }
-            return
-        }
-        
-        let request = Request(first: first, after: cursor, orderBy: sorting)
-        useCaseProvider.fetchAfterPosts(request) { [weak self] in self?.handle($0) }
+    func didNextPageTriggerFired() {
+        guard let cursor = state.currentCursor else { return }
+        let request = Request(first: state.perPage, after: cursor, orderBy: state.sorting)
+        useCaseProvider.fetchAfterPosts(request) { [weak self] in self?.handle($0, isReplace: false) }
     }
     
-    private func handle(_ result: Result<PostListResponse, Error>) {
+    private func handle(_ result: Result<PostListResponse, Error>, isReplace: Bool) {
         switch result {
         case .success(let response):
-            self.currentCursor = response.data.cursor
-            self.posts = response.data.items.map { PostData($0) }
-            print(posts.count)
+            self.state.currentCursor = response.data.cursor
+            
+            if isReplace {
+                self.posts = response.data.items.map { PostData($0) }
+            } else {
+                self.posts += response.data.items.map { PostData($0) }
+            }
             
         case .failure(let error):
-            fatalError(error.localizedDescription)
+//            fatalError(error.localizedDescription)
+        print(error.localizedDescription)
         }
     }
     

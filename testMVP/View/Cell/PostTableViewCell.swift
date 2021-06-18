@@ -48,11 +48,21 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .large)
+        activity.startAnimating()
+        activity.isHidden = false
+        activity.color = .systemBlue
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
+    }()
+    
     let authorImageView: UIImageView = {
         let iv = UIImageView()
         iv.layer.cornerRadius = 10
         iv.clipsToBounds = true
-        iv.backgroundColor = .systemGray5
+//        iv.backgroundColor = .systemGray5
+        iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
@@ -130,6 +140,8 @@ class PostTableViewCell: UITableViewCell {
         super.prepareForReuse()
         
         authorImageView.image = nil
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
     }
     
     
@@ -147,8 +159,9 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(postFooterView)
         
         postHeaderView.addSubview(authorNameLabel)
+        postHeaderView.addSubview(activityIndicator)
         postHeaderView.addSubview(authorImageView)
-        
+
         postContentView.addSubview(textContentLabel)
 
 //        postContentView.addSubview(postTypeLabel)
@@ -180,6 +193,12 @@ class PostTableViewCell: UITableViewCell {
             postFooterView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
             postFooterView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
             postFooterView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            
+            activityIndicator.topAnchor.constraint(equalTo: postHeaderView.topAnchor),
+            activityIndicator.leftAnchor.constraint(equalTo: postHeaderView.leftAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: CGFloat(data.cellHeaderHeight)),
+            activityIndicator.heightAnchor.constraint(equalTo: authorImageView.widthAnchor),
+            activityIndicator.bottomAnchor.constraint(equalTo: postHeaderView.bottomAnchor),
             
             authorImageView.topAnchor.constraint(equalTo: postHeaderView.topAnchor),
             authorImageView.leftAnchor.constraint(equalTo: postHeaderView.leftAnchor),
@@ -230,10 +249,23 @@ class PostTableViewCell: UITableViewCell {
         postContents.text = data.contentsString
         
         if let url = data.imageContentURL {
+            
             url.downloadImageData { [weak self] (imageData) in
-                guard let self = self, let imageData = imageData else { return }
+                
+                guard let self = self else { return }
+                
+                guard let imageData = imageData else {
+                    self.authorImageView.image = data.authorGender.getImage()
+                    return
+                }
+                
+                self.activityIndicator.isHidden = true
                 self.authorImageView.image = UIImage(data: imageData)
             }
+        } else {
+            
+            self.activityIndicator.isHidden = true
+            authorImageView.image = data.authorGender.getImage()
         }
     }
 }

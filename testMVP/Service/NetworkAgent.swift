@@ -14,7 +14,7 @@ class NetworkAgent {
     private init() { }
     
     func request<T: Decodable>(_ url: URL, _ completion: @escaping (Result<T, Error>) -> Void) {
-        
+        print(url)
         let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             DispatchQueue.global(qos: .background).async {

@@ -65,8 +65,16 @@ enum PostContent: Decodable {
 struct Author: Decodable {
     let id: String
     let name: String
+    let gender: Gender
     let banner: Banner?
     let photo: Photo?
+}
+
+enum Gender: String, Decodable {
+    case male = "MALE"
+    case female = "FEMALE"
+    case unset = "UNSET"
+    case other = "OTHER"
 }
 
 struct Banner: Decodable {

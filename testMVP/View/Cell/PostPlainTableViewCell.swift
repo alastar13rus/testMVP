@@ -54,7 +54,6 @@ class PostPlainTableViewCell: PostTableViewCell {
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
-        iv.backgroundColor = .gray
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
@@ -65,7 +64,6 @@ class PostPlainTableViewCell: PostTableViewCell {
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
-        iv.backgroundColor = .gray
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
@@ -76,7 +74,6 @@ class PostPlainTableViewCell: PostTableViewCell {
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
-        iv.backgroundColor = .gray
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
@@ -89,13 +86,13 @@ class PostPlainTableViewCell: PostTableViewCell {
         secondImageContentImageView.image = nil
         imageGifContentImageView.image = nil
         
-        NSLayoutConstraint.deactivate(imageContentConstraints)
-        NSLayoutConstraint.deactivate(secondImageContentConstraints)
-        NSLayoutConstraint.deactivate(imageGifContentConstraints)
+//        NSLayoutConstraint.deactivate(imageContentConstraints)
+//        NSLayoutConstraint.deactivate(secondImageContentConstraints)
+//        NSLayoutConstraint.deactivate(imageGifContentConstraints)
         
-//        imageContentImageView.removeFromSuperview()
-//        secondImageContentImageView.removeFromSuperview()
-//        imageGifContentImageView.removeFromSuperview()
+        imageContentImageView.removeFromSuperview()
+        secondImageContentImageView.removeFromSuperview()
+        imageGifContentImageView.removeFromSuperview()
     }
     
 //    MARK: - Methods

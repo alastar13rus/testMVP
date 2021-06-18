@@ -16,7 +16,6 @@ class PostAudioCoverTableViewCell: PostTableViewCell {
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
-        iv.backgroundColor = .gray
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
@@ -33,6 +32,7 @@ class PostAudioCoverTableViewCell: PostTableViewCell {
         override func prepareForReuse() {
             super.prepareForReuse()
             
+            coverImageView.image = nil
 //            coverImageView.removeFromSuperview()
 //            durationLabel.removeFromSuperview()
         }
@@ -50,7 +50,6 @@ class PostAudioCoverTableViewCell: PostTableViewCell {
                 guard let self = self, let imageData = imageData else { return }
                 self.coverImageView.image = UIImage(data: imageData)
             }
-//            postContentView.addSubview(coverImageView)
         }
     }
     

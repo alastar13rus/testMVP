@@ -9,7 +9,7 @@ import Foundation
 
 extension URL {
     func downloadImageData(_ completion: @escaping (Data?) -> Void) {
-        print(self)
+
         DispatchQueue.global(qos: .background).async {
             let dataTask = URLSession.shared.dataTask(with: self) { (data, _, error) in
                 

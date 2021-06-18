@@ -46,6 +46,7 @@ struct PostData {
     let isMyFavorite: Bool
     let authorName: String?
     let authorPhotoURL: URL?
+    let authorGender: Gender?
     
     var textContent: String? = nil
     var imageContentURL: URL? = nil
@@ -100,11 +101,24 @@ struct PostData {
         
         model.contents.forEach {
             switch $0 {
-            case .image(let content): images.append(content.small?.url)
-            case .imageGif(let content): imageGif = content.small?.url
-            case .audio(let content): audio = (url: content.url, duration: "Продолжительность: \(ceil(content.duration * 100) / 100) сек")
-            case .video(let content): video = (url: content.url, duration: "Продолжительность: \(ceil(content.duration * 100) / 100) сек", previewImageURL: content.previewImage.data.medium?.url)
-            case .tags(let content): tags = content.values.joined(separator: " ,")
+            
+            case .image(let content):
+                images.append(content.small?.url ?? content.extraSmall?.url)
+            
+            case .imageGif(let content):
+                imageGif = content.small?.url ?? content.extraSmall?.url
+            
+            case .audio(let content):
+                audio = (url: content.url,
+                         duration: "Продолжительность: \(ceil(content.duration * 100) / 100) сек")
+            
+            case .video(let content):
+                video = (url: content.url,
+                         duration: "Продолжительность: \(ceil(content.duration * 100) / 100) сек",
+                         previewImageURL: content.previewImage.data.medium?.url)
+            
+            case .tags(let content):
+                tags = content.values.joined(separator: " ,")
             default: return
             }
         }
@@ -134,6 +148,19 @@ struct PostData {
         
         self.authorName = model.author?.name
         self.authorPhotoURL = model.author?.photo?.data.small?.url
+        self.authorGender = model.author?.gender
         
+    }
+}
+
+extension PostData: Equatable {
+    static func == (lhs: PostData, rhs: PostData) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+extension PostData: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }

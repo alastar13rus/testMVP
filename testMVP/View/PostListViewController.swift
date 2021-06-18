@@ -9,7 +9,7 @@ import UIKit
 
 protocol PostListView: class {
     
-    func updateData()
+    func updateData(newList: [PostData], oldList: [PostData])
     
 }
 
@@ -17,14 +17,24 @@ class PostListViewController: UIViewController, PostListView {
     
 //    MARK: - Properties
     var presenter: PostListPresenter!
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
+        refresh.translatesAutoresizingMaskIntoConstraints = false
+        return refresh
+    }()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
         tableView.separatorColor = .systemBlue
+        tableView.refreshControl = refreshControl
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
         tableView.register(PostPlainTableViewCell.self, forCellReuseIdentifier: String(describing: PostPlainTableViewCell.self))
+        tableView.register(PostPlainCoverTableViewCell.self, forCellReuseIdentifier: String(describing: PostPlainCoverTableViewCell.self))
         tableView.register(PostAudioCoverTableViewCell.self, forCellReuseIdentifier: String(describing: PostAudioCoverTableViewCell.self))
         tableView.register(PostVideoTableViewCell.self, forCellReuseIdentifier: String(describing: PostVideoTableViewCell.self))
         tableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: String(describing: PostImageTableViewCell.self))
@@ -45,7 +55,7 @@ class PostListViewController: UIViewController, PostListView {
 //    MARK: - Methods
     private func setupUI() {
         view.backgroundColor = .white
-        presenter.didFetchTriggerFired()
+        presenter.didFirstPageTriggerFired()
     }
 
     private func setupHierarhy() {
@@ -61,8 +71,14 @@ class PostListViewController: UIViewController, PostListView {
         ])
     }
     
-    func updateData() {
-        tableView.reloadData()
+    func updateData(newList: [PostData], oldList: [PostData]) {
+        refreshControl.endRefreshing()
+        tableView.reloadDataWithAnimation(newList: newList, oldList: oldList)
+    }
+    
+    @objc private func handleRefresh(_ sender: UIRefreshControl) {
+        sender.beginRefreshing()
+        presenter.didFirstPageTriggerFired()
     }
 
 }
@@ -125,5 +141,11 @@ extension PostListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == presenter.posts.count - 1 {
+            presenter.didNextPageTriggerFired()
+        }
     }
 }

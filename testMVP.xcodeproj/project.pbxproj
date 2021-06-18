@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB5C3A7A267CC595002B1D0E /* OptionalGender+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3A79267CC595002B1D0E /* OptionalGender+Extension.swift */; };
+		BB5C3A7F267CCF2C002B1D0E /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3A7E267CCF2C002B1D0E /* UITableView+Extension.swift */; };
+		BB5C3A83267CDDB2002B1D0E /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3A82267CDDB2002B1D0E /* Array+Extension.swift */; };
 		BBDF7CC2267947B800539526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC1267947B800539526 /* AppDelegate.swift */; };
 		BBDF7CC4267947B800539526 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC3267947B800539526 /* SceneDelegate.swift */; };
 		BBDF7CC6267947B800539526 /* PostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC5267947B800539526 /* PostListViewController.swift */; };
@@ -31,6 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB5C3A79267CC595002B1D0E /* OptionalGender+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionalGender+Extension.swift"; sourceTree = "<group>"; };
+		BB5C3A7E267CCF2C002B1D0E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		BB5C3A82267CDDB2002B1D0E /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		BBDF7CBE267947B800539526 /* testMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBDF7CC1267947B800539526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBDF7CC3267947B800539526 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +202,9 @@
 			children = (
 				BBDF7D0E2679EF6900539526 /* Date+Extension.swift */,
 				BBDF7D20267A0FC700539526 /* URL+Extension.swift */,
+				BB5C3A79267CC595002B1D0E /* OptionalGender+Extension.swift */,
+				BB5C3A7E267CCF2C002B1D0E /* UITableView+Extension.swift */,
+				BB5C3A82267CDDB2002B1D0E /* Array+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -268,8 +277,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB5C3A7A267CC595002B1D0E /* OptionalGender+Extension.swift in Sources */,
 				BBDF7CDE26794D2900539526 /* PostListPresenter.swift in Sources */,
 				BBDF7CE82679542800539526 /* PostListRouter.swift in Sources */,
+				BB5C3A7F267CCF2C002B1D0E /* UITableView+Extension.swift in Sources */,
 				BBDF7D18267A02A300539526 /* PostPlainCoverTableViewCell.swift in Sources */,
 				BBDF7CC6267947B800539526 /* PostListViewController.swift in Sources */,
 				BBDF7CED267957EE00539526 /* Post.swift in Sources */,
@@ -279,6 +290,7 @@
 				BBDF7D122679FFD500539526 /* PostAudioCoverTableViewCell.swift in Sources */,
 				BBDF7D1B267A0CCB00539526 /* PostImageTableViewCell.swift in Sources */,
 				BBDF7CC2267947B800539526 /* AppDelegate.swift in Sources */,
+				BB5C3A83267CDDB2002B1D0E /* Array+Extension.swift in Sources */,
 				BBDF7CFB267973E900539526 /* CustomError.swift in Sources */,
 				BBDF7CF42679648F00539526 /* NetworkProvider.swift in Sources */,
 				BBDF7D21267A0FC700539526 /* URL+Extension.swift in Sources */,

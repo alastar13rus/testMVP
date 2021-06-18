@@ -41,7 +41,7 @@ class NetworkProvider: UseCaseProvider {
             completion(.failure(CustomError.missingRequestParams))
             return
         }
-        
+        print("cursor \t\t\t: \(after)")
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = Self.baseURL
@@ -51,6 +51,11 @@ class NetworkProvider: UseCaseProvider {
             .init(name: "after", value: after),
             .init(name: "orderBy", value: request.orderBy.rawValue)
         ]
+        
+///     для корректной работы cursor'a
+        urlComponents.percentEncodedQuery = urlComponents
+            .percentEncodedQuery?
+            .replacingOccurrences(of: "+", with: "%2B")
 
         guard let url = urlComponents.url else {
             completion(.failure(CustomError.invalidURL))

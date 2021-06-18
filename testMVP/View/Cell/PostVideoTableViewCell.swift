@@ -16,7 +16,6 @@ class PostVideoTableViewCell: PostTableViewCell {
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
-        iv.backgroundColor = .gray
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
@@ -34,6 +33,7 @@ class PostVideoTableViewCell: PostTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        previewImageView.image = nil
 //        previewImageView.removeFromSuperview()
 //        videoDurationLabel.removeFromSuperview()
     }
