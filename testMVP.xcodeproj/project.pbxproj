@@ -28,7 +28,6 @@
 		BBDF7D122679FFD500539526 /* PostAudioCoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D112679FFD500539526 /* PostAudioCoverTableViewCell.swift */; };
 		BBDF7D152679FFE800539526 /* PostPlainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D142679FFE800539526 /* PostPlainTableViewCell.swift */; };
 		BBDF7D18267A02A300539526 /* PostPlainCoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D17267A02A300539526 /* PostPlainCoverTableViewCell.swift */; };
-		BBDF7D1B267A0CCB00539526 /* PostImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D1A267A0CCB00539526 /* PostImageTableViewCell.swift */; };
 		BBDF7D1E267A0D2100539526 /* PostVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D1D267A0D2100539526 /* PostVideoTableViewCell.swift */; };
 		BBDF7D21267A0FC700539526 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D20267A0FC700539526 /* URL+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -57,7 +56,6 @@
 		BBDF7D112679FFD500539526 /* PostAudioCoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAudioCoverTableViewCell.swift; sourceTree = "<group>"; };
 		BBDF7D142679FFE800539526 /* PostPlainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPlainTableViewCell.swift; sourceTree = "<group>"; };
 		BBDF7D17267A02A300539526 /* PostPlainCoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPlainCoverTableViewCell.swift; sourceTree = "<group>"; };
-		BBDF7D1A267A0CCB00539526 /* PostImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageTableViewCell.swift; sourceTree = "<group>"; };
 		BBDF7D1D267A0D2100539526 /* PostVideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVideoTableViewCell.swift; sourceTree = "<group>"; };
 		BBDF7D20267A0FC700539526 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,7 +173,6 @@
 				BBDF7D112679FFD500539526 /* PostAudioCoverTableViewCell.swift */,
 				BBDF7D142679FFE800539526 /* PostPlainTableViewCell.swift */,
 				BBDF7D17267A02A300539526 /* PostPlainCoverTableViewCell.swift */,
-				BBDF7D1A267A0CCB00539526 /* PostImageTableViewCell.swift */,
 				BBDF7D1D267A0D2100539526 /* PostVideoTableViewCell.swift */,
 			);
 			path = Cell;
@@ -288,7 +285,6 @@
 				BBDF7D07267999F500539526 /* PostData.swift in Sources */,
 				BBDF7CFE2679742600539526 /* Request.swift in Sources */,
 				BBDF7D122679FFD500539526 /* PostAudioCoverTableViewCell.swift in Sources */,
-				BBDF7D1B267A0CCB00539526 /* PostImageTableViewCell.swift in Sources */,
 				BBDF7CC2267947B800539526 /* AppDelegate.swift in Sources */,
 				BB5C3A83267CDDB2002B1D0E /* Array+Extension.swift in Sources */,
 				BBDF7CFB267973E900539526 /* CustomError.swift in Sources */,

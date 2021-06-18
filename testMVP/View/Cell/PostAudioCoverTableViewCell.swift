@@ -69,8 +69,8 @@ class PostAudioCoverTableViewCell: PostTableViewCell {
         NSLayoutConstraint.activate([
             
             audioCoverImageView.topAnchor.constraint(equalTo: textContentLabel.bottomAnchor, constant: 12),
-            audioCoverImageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
-            audioCoverImageView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
+            audioCoverImageView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
+            audioCoverImageView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -12),
             audioCoverImageView.heightAnchor.constraint(equalToConstant: 100),
             audioCoverImageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor),
             

@@ -37,7 +37,6 @@ class PostListViewController: UIViewController, PostListView {
         tableView.register(PostPlainCoverTableViewCell.self, forCellReuseIdentifier: String(describing: PostPlainCoverTableViewCell.self))
         tableView.register(PostAudioCoverTableViewCell.self, forCellReuseIdentifier: String(describing: PostAudioCoverTableViewCell.self))
         tableView.register(PostVideoTableViewCell.self, forCellReuseIdentifier: String(describing: PostVideoTableViewCell.self))
-        tableView.register(PostImageTableViewCell.self, forCellReuseIdentifier: String(describing: PostImageTableViewCell.self))
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -112,11 +111,6 @@ extension PostListViewController: UITableViewDataSource {
             cell.postData = presenter.posts[indexPath.row]
             return cell
             
-        case .image:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostImageTableViewCell.self)) as? PostImageTableViewCell else { return UITableViewCell() }
-            cell.postData = presenter.posts[indexPath.row]
-            return cell
-            
         case .video:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostVideoTableViewCell.self)) as? PostVideoTableViewCell else { return UITableViewCell() }
             cell.postData = presenter.posts[indexPath.row]
@@ -132,11 +126,13 @@ extension PostListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let item = presenter.posts[indexPath.row]
-        return CGFloat(
-            item.cellHeaderHeight +
-            item.cellContentHeight +
-            item.cellFooterHeight +
-            item.cellPaddings)
+        
+        var textHeight: CGFloat = 0
+        if let textContent = item.textContent {
+            textHeight = tableView.calculateTextLabelHeight(withContent: textContent, font: UIFont.systemFont(ofSize: 14))
+        }
+        return textHeight + CGFloat(item.cellHeaderHeight + item.cellContentHeight + item.cellFooterHeight + item.cellPaddings)
+
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
