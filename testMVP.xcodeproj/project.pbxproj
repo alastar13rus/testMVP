@@ -10,6 +10,14 @@
 		BB5C3A7A267CC595002B1D0E /* OptionalGender+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3A79267CC595002B1D0E /* OptionalGender+Extension.swift */; };
 		BB5C3A7F267CCF2C002B1D0E /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3A7E267CCF2C002B1D0E /* UITableView+Extension.swift */; };
 		BB5C3A83267CDDB2002B1D0E /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3A82267CDDB2002B1D0E /* Array+Extension.swift */; };
+		BB5C3A90267CFD62002B1D0E /* testMVPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3A8F267CFD62002B1D0E /* testMVPTests.swift */; };
+		BB5C3A9A267D0058002B1D0E /* PostListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3A99267D0058002B1D0E /* PostListTableView.swift */; };
+		BB5C3AAC267D2CEC002B1D0E /* SortingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3AAB267D2CEC002B1D0E /* SortingViewController.swift */; };
+		BB5C3AB0267D2EB7002B1D0E /* SortingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3AAF267D2EB7002B1D0E /* SortingPresenter.swift */; };
+		BB5C3AB8267D3786002B1D0E /* SortingUseCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3AB7267D3786002B1D0E /* SortingUseCaseProvider.swift */; };
+		BB5C3ABC267D385C002B1D0E /* UserDefaultsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3ABB267D385C002B1D0E /* UserDefaultsProvider.swift */; };
+		BB5C3AC3267E28C5002B1D0E /* SortingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3AC2267E28C5002B1D0E /* SortingTableViewCell.swift */; };
+		BBB6C63C267E45C7009E3814 /* SortingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C63B267E45C7009E3814 /* SortingData.swift */; };
 		BBDF7CC2267947B800539526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC1267947B800539526 /* AppDelegate.swift */; };
 		BBDF7CC4267947B800539526 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC3267947B800539526 /* SceneDelegate.swift */; };
 		BBDF7CC6267947B800539526 /* PostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC5267947B800539526 /* PostListViewController.swift */; };
@@ -17,7 +25,7 @@
 		BBDF7CDE26794D2900539526 /* PostListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CDD26794D2900539526 /* PostListPresenter.swift */; };
 		BBDF7CE82679542800539526 /* PostListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CE72679542800539526 /* PostListRouter.swift */; };
 		BBDF7CED267957EE00539526 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CEC267957EE00539526 /* Post.swift */; };
-		BBDF7CF1267961E000539526 /* UseCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CF0267961E000539526 /* UseCaseProvider.swift */; };
+		BBDF7CF1267961E000539526 /* PostUseCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CF0267961E000539526 /* PostUseCaseProvider.swift */; };
 		BBDF7CF42679648F00539526 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CF32679648F00539526 /* NetworkProvider.swift */; };
 		BBDF7CF7267965B000539526 /* NetworkAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CF6267965B000539526 /* NetworkAgent.swift */; };
 		BBDF7CFB267973E900539526 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CFA267973E900539526 /* CustomError.swift */; };
@@ -32,10 +40,30 @@
 		BBDF7D21267A0FC700539526 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D20267A0FC700539526 /* URL+Extension.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BB5C3A92267CFD62002B1D0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBDF7CB6267947B800539526 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BBDF7CBD267947B800539526;
+			remoteInfo = testMVP;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		BB5C3A79267CC595002B1D0E /* OptionalGender+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionalGender+Extension.swift"; sourceTree = "<group>"; };
 		BB5C3A7E267CCF2C002B1D0E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		BB5C3A82267CDDB2002B1D0E /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		BB5C3A8D267CFD62002B1D0E /* testMVPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testMVPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB5C3A8F267CFD62002B1D0E /* testMVPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testMVPTests.swift; sourceTree = "<group>"; };
+		BB5C3A91267CFD62002B1D0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB5C3A99267D0058002B1D0E /* PostListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListTableView.swift; sourceTree = "<group>"; };
+		BB5C3AAB267D2CEC002B1D0E /* SortingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingViewController.swift; sourceTree = "<group>"; };
+		BB5C3AAF267D2EB7002B1D0E /* SortingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingPresenter.swift; sourceTree = "<group>"; };
+		BB5C3AB7267D3786002B1D0E /* SortingUseCaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingUseCaseProvider.swift; sourceTree = "<group>"; };
+		BB5C3ABB267D385C002B1D0E /* UserDefaultsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProvider.swift; sourceTree = "<group>"; };
+		BB5C3AC2267E28C5002B1D0E /* SortingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingTableViewCell.swift; sourceTree = "<group>"; };
+		BBB6C63B267E45C7009E3814 /* SortingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingData.swift; sourceTree = "<group>"; };
 		BBDF7CBE267947B800539526 /* testMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBDF7CC1267947B800539526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBDF7CC3267947B800539526 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,7 +73,7 @@
 		BBDF7CDD26794D2900539526 /* PostListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListPresenter.swift; sourceTree = "<group>"; };
 		BBDF7CE72679542800539526 /* PostListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListRouter.swift; sourceTree = "<group>"; };
 		BBDF7CEC267957EE00539526 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		BBDF7CF0267961E000539526 /* UseCaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseProvider.swift; sourceTree = "<group>"; };
+		BBDF7CF0267961E000539526 /* PostUseCaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUseCaseProvider.swift; sourceTree = "<group>"; };
 		BBDF7CF32679648F00539526 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		BBDF7CF6267965B000539526 /* NetworkAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAgent.swift; sourceTree = "<group>"; };
 		BBDF7CFA267973E900539526 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
@@ -61,6 +89,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BB5C3A8A267CFD62002B1D0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBDF7CBB267947B800539526 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -71,10 +106,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB5C3A8E267CFD62002B1D0E /* testMVPTests */ = {
+			isa = PBXGroup;
+			children = (
+				BB5C3A8F267CFD62002B1D0E /* testMVPTests.swift */,
+				BB5C3A91267CFD62002B1D0E /* Info.plist */,
+			);
+			path = testMVPTests;
+			sourceTree = "<group>";
+		};
+		BB5C3A9D267D01A6002B1D0E /* PostList */ = {
+			isa = PBXGroup;
+			children = (
+				BBDF7CC5267947B800539526 /* PostListViewController.swift */,
+				BB5C3A99267D0058002B1D0E /* PostListTableView.swift */,
+				BBDF7D002679987100539526 /* Cell */,
+			);
+			path = PostList;
+			sourceTree = "<group>";
+		};
+		BB5C3AA0267D05C4002B1D0E /* Sorting */ = {
+			isa = PBXGroup;
+			children = (
+				BB5C3AC1267E28BB002B1D0E /* Cell */,
+				BB5C3AAB267D2CEC002B1D0E /* SortingViewController.swift */,
+			);
+			path = Sorting;
+			sourceTree = "<group>";
+		};
+		BB5C3AC1267E28BB002B1D0E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BB5C3AC2267E28C5002B1D0E /* SortingTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		BBDF7CB5267947B800539526 = {
 			isa = PBXGroup;
 			children = (
 				BBDF7CC0267947B800539526 /* testMVP */,
+				BB5C3A8E267CFD62002B1D0E /* testMVPTests */,
 				BBDF7CBF267947B800539526 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				BBDF7CBE267947B800539526 /* testMVP.app */,
+				BB5C3A8D267CFD62002B1D0E /* testMVPTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				BBDF7CDD26794D2900539526 /* PostListPresenter.swift */,
+				BB5C3AAF267D2EB7002B1D0E /* SortingPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -132,8 +206,8 @@
 		BBDF7CE32679531100539526 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BBDF7D002679987100539526 /* Cell */,
-				BBDF7CC5267947B800539526 /* PostListViewController.swift */,
+				BB5C3AA0267D05C4002B1D0E /* Sorting */,
+				BB5C3A9D267D01A6002B1D0E /* PostList */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -151,7 +225,9 @@
 		BBDF7CEF267961CE00539526 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				BBDF7CF0267961E000539526 /* UseCaseProvider.swift */,
+				BBDF7CF0267961E000539526 /* PostUseCaseProvider.swift */,
+				BB5C3AB7267D3786002B1D0E /* SortingUseCaseProvider.swift */,
+				BB5C3ABB267D385C002B1D0E /* UserDefaultsProvider.swift */,
 				BBDF7CF32679648F00539526 /* NetworkProvider.swift */,
 				BBDF7CF6267965B000539526 /* NetworkAgent.swift */,
 			);
@@ -190,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				BBDF7D06267999F500539526 /* PostData.swift */,
+				BBB6C63B267E45C7009E3814 /* SortingData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -209,6 +286,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BB5C3A8C267CFD62002B1D0E /* testMVPTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB5C3A96267CFD62002B1D0E /* Build configuration list for PBXNativeTarget "testMVPTests" */;
+			buildPhases = (
+				BB5C3A89267CFD62002B1D0E /* Sources */,
+				BB5C3A8A267CFD62002B1D0E /* Frameworks */,
+				BB5C3A8B267CFD62002B1D0E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB5C3A93267CFD62002B1D0E /* PBXTargetDependency */,
+			);
+			name = testMVPTests;
+			productName = testMVPTests;
+			productReference = BB5C3A8D267CFD62002B1D0E /* testMVPTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BBDF7CBD267947B800539526 /* testMVP */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBDF7CD2267947C100539526 /* Build configuration list for PBXNativeTarget "testMVP" */;
@@ -235,6 +330,10 @@
 				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					BB5C3A8C267CFD62002B1D0E = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = BBDF7CBD267947B800539526;
+					};
 					BBDF7CBD267947B800539526 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -254,11 +353,19 @@
 			projectRoot = "";
 			targets = (
 				BBDF7CBD267947B800539526 /* testMVP */,
+				BB5C3A8C267CFD62002B1D0E /* testMVPTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BB5C3A8B267CFD62002B1D0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBDF7CBC267947B800539526 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -270,6 +377,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BB5C3A89267CFD62002B1D0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB5C3A90267CFD62002B1D0E /* testMVPTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBDF7CBA267947B800539526 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -277,13 +392,19 @@
 				BB5C3A7A267CC595002B1D0E /* OptionalGender+Extension.swift in Sources */,
 				BBDF7CDE26794D2900539526 /* PostListPresenter.swift in Sources */,
 				BBDF7CE82679542800539526 /* PostListRouter.swift in Sources */,
+				BB5C3ABC267D385C002B1D0E /* UserDefaultsProvider.swift in Sources */,
+				BB5C3AC3267E28C5002B1D0E /* SortingTableViewCell.swift in Sources */,
 				BB5C3A7F267CCF2C002B1D0E /* UITableView+Extension.swift in Sources */,
 				BBDF7D18267A02A300539526 /* PostPlainCoverTableViewCell.swift in Sources */,
 				BBDF7CC6267947B800539526 /* PostListViewController.swift in Sources */,
+				BB5C3A9A267D0058002B1D0E /* PostListTableView.swift in Sources */,
 				BBDF7CED267957EE00539526 /* Post.swift in Sources */,
 				BBDF7D152679FFE800539526 /* PostPlainTableViewCell.swift in Sources */,
+				BB5C3AB8267D3786002B1D0E /* SortingUseCaseProvider.swift in Sources */,
+				BBB6C63C267E45C7009E3814 /* SortingData.swift in Sources */,
 				BBDF7D07267999F500539526 /* PostData.swift in Sources */,
 				BBDF7CFE2679742600539526 /* Request.swift in Sources */,
+				BB5C3AB0267D2EB7002B1D0E /* SortingPresenter.swift in Sources */,
 				BBDF7D122679FFD500539526 /* PostAudioCoverTableViewCell.swift in Sources */,
 				BBDF7CC2267947B800539526 /* AppDelegate.swift in Sources */,
 				BB5C3A83267CDDB2002B1D0E /* Array+Extension.swift in Sources */,
@@ -291,8 +412,9 @@
 				BBDF7CF42679648F00539526 /* NetworkProvider.swift in Sources */,
 				BBDF7D21267A0FC700539526 /* URL+Extension.swift in Sources */,
 				BBDF7D0F2679EF6900539526 /* Date+Extension.swift in Sources */,
+				BB5C3AAC267D2CEC002B1D0E /* SortingViewController.swift in Sources */,
 				BBDF7CC4267947B800539526 /* SceneDelegate.swift in Sources */,
-				BBDF7CF1267961E000539526 /* UseCaseProvider.swift in Sources */,
+				BBDF7CF1267961E000539526 /* PostUseCaseProvider.swift in Sources */,
 				BBDF7CF7267965B000539526 /* NetworkAgent.swift in Sources */,
 				BBDF7D022679987800539526 /* PostTableViewCell.swift in Sources */,
 				BBDF7D1E267A0D2100539526 /* PostVideoTableViewCell.swift in Sources */,
@@ -301,7 +423,55 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		BB5C3A93267CFD62002B1D0E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BBDF7CBD267947B800539526 /* testMVP */;
+			targetProxy = BB5C3A92267CFD62002B1D0E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		BB5C3A94267CFD62002B1D0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6PL6THVP79;
+				INFOPLIST_FILE = testMVPTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.home.ios.testMVPTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testMVP.app/testMVP";
+			};
+			name = Debug;
+		};
+		BB5C3A95267CFD62002B1D0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6PL6THVP79;
+				INFOPLIST_FILE = testMVPTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.home.ios.testMVPTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testMVP.app/testMVP";
+			};
+			name = Release;
+		};
 		BBDF7CD0267947C100539526 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -459,6 +629,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BB5C3A96267CFD62002B1D0E /* Build configuration list for PBXNativeTarget "testMVPTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB5C3A94267CFD62002B1D0E /* Debug */,
+				BB5C3A95267CFD62002B1D0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BBDF7CB9267947B800539526 /* Build configuration list for PBXProject "testMVP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

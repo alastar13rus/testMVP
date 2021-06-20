@@ -9,14 +9,17 @@ import UIKit
 
 protocol PostListView: class {
     
-    func updateData(newList: [PostData], oldList: [PostData])
-    
+    func updateData()
+    func updatePartialData(newList: [PostData], oldList: [PostData])
+    func updateSortingName()
+    func updateFetchingStatus(_ status: Bool)
+
 }
 
 class PostListViewController: UIViewController, PostListView {
     
 //    MARK: - Properties
-    var presenter: PostListPresenter!
+    var presenter: PostListPresenterProtocol!
     
     lazy var refreshControl: UIRefreshControl = {
         let refresh = UIRefreshControl()
@@ -25,20 +28,19 @@ class PostListViewController: UIViewController, PostListView {
         return refresh
     }()
     
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.tableFooterView = UIView()
-        tableView.separatorColor = .systemBlue
+    lazy var tableView: PostListTableView = {
+        let tableView = PostListTableView()
         tableView.refreshControl = refreshControl
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
-        tableView.register(PostPlainTableViewCell.self, forCellReuseIdentifier: String(describing: PostPlainTableViewCell.self))
-        tableView.register(PostPlainCoverTableViewCell.self, forCellReuseIdentifier: String(describing: PostPlainCoverTableViewCell.self))
-        tableView.register(PostAudioCoverTableViewCell.self, forCellReuseIdentifier: String(describing: PostAudioCoverTableViewCell.self))
-        tableView.register(PostVideoTableViewCell.self, forCellReuseIdentifier: String(describing: PostVideoTableViewCell.self))
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
+    }()
+    
+    let activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .large)
+        activity.hidesWhenStopped = true
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
     }()
     
 //    MARK: - Lifecycle
@@ -49,36 +51,106 @@ class PostListViewController: UIViewController, PostListView {
         setupHierarhy()
         setupConstraints()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.didFirstPageTriggerFired()
+    }
 
     
 //    MARK: - Methods
     private func setupUI() {
+        setupNavigation()
         view.backgroundColor = .white
-        presenter.didFirstPageTriggerFired()
+    }
+    
+    private func setupNavigation() {
+        navigationItem.title = "Список постов"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "sort"), style: .plain, target: self, action: #selector(sortingSettingsButtonPressed(_:)))
     }
 
     private func setupHierarhy() {
         view.addSubview(tableView)
+        view.addSubview(activityIndicator)
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            
+                activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
         ])
     }
     
-    func updateData(newList: [PostData], oldList: [PostData]) {
+    func updateData() {
+        print(#function)
+        refreshControl.endRefreshing()
+        tableView.reloadData()
+        tableViewBackgroundView()
+    }
+    
+    private func tableViewBackgroundView() {
+        
+        let tableViewBackgroundView: UIView = {
+            let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.bounds.width, height: tableView.bounds.height)))
+            let textLabel = UILabel()
+            textLabel.textColor = .secondaryLabel
+            textLabel.text = "Записей не найдено..."
+            textLabel.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
+            let textWidth = textLabel.intrinsicContentSize.width
+            let textHeight = textLabel.intrinsicContentSize.height
+
+            textLabel.frame = CGRect(x: view.bounds.midX - textWidth / 2,
+                                     y: view.bounds.midY - textHeight / 2,
+                                     width: textWidth,
+                                     height: textHeight)
+                
+            view.addSubview(textLabel)
+            return view
+        }()
+        
+        tableView.backgroundView = presenter.posts.isEmpty ? tableViewBackgroundView : nil
+    }
+    
+    func updatePartialData(newList: [PostData], oldList: [PostData]) {
         refreshControl.endRefreshing()
         tableView.reloadDataWithAnimation(newList: newList, oldList: oldList)
     }
     
+    func updateSortingName() {
+        tableView.tableHeaderView = {
+            let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.bounds.width, height: 48)))
+            let textLabel = UILabel()
+            view.backgroundColor = .systemGray5
+            view.addSubview(textLabel)
+            textLabel.text = presenter.sortingName
+            textLabel.frame = view.bounds
+            return view
+        }()
+    }
+    
+    func updateFetchingStatus(_ status: Bool) {
+        status ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+    }
+
     @objc private func handleRefresh(_ sender: UIRefreshControl) {
         sender.beginRefreshing()
         presenter.didFirstPageTriggerFired()
     }
+    
+    @objc private func sortingSettingsButtonPressed(_ sender: UIBarButtonItem) {
+        presenter.presentSortingSettings()
+    }
+    
+    
 
 }
 
@@ -88,8 +160,6 @@ extension PostListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.posts.count
     }
-    
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -117,9 +187,7 @@ extension PostListViewController: UITableViewDataSource {
             return cell
             
         }
-        
     }
-    
 }
 
 extension PostListViewController: UITableViewDelegate {
@@ -144,4 +212,5 @@ extension PostListViewController: UITableViewDelegate {
             presenter.didNextPageTriggerFired()
         }
     }
+    
 }
