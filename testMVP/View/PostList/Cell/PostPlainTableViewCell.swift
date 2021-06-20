@@ -93,6 +93,7 @@ class PostPlainTableViewCell: PostTableViewCell {
         imageContentImageView.removeFromSuperview()
         secondImageContentImageView.removeFromSuperview()
         imageGifContentImageView.removeFromSuperview()
+        layoutSubviews()
     }
     
 //    MARK: - Methods
@@ -106,6 +107,7 @@ class PostPlainTableViewCell: PostTableViewCell {
             }
             postContentView.addSubview(imageContentImageView)
             NSLayoutConstraint.activate(imageContentConstraints)
+            layoutIfNeeded()
         }
         
         if let url = data.secondImageContentURL {
@@ -115,6 +117,7 @@ class PostPlainTableViewCell: PostTableViewCell {
             }
             postContentView.addSubview(secondImageContentImageView)
             NSLayoutConstraint.activate(secondImageContentConstraints)
+            layoutIfNeeded()
         }
         
         if let url = data.imageGifContentURL {
@@ -124,6 +127,7 @@ class PostPlainTableViewCell: PostTableViewCell {
             }
             postContentView.addSubview(imageGifContentImageView)
             NSLayoutConstraint.activate(imageGifContentConstraints)
+            layoutIfNeeded()
         }
         
         

@@ -18,9 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         guard let window = window else { return }
         
-        let router = PostListRouter()
-        let viewController = router.buildPostListBundle().vc
-        let navigationController = UINavigationController(rootViewController: viewController)
+        let navigationController = UINavigationController()
+        let router = PostListRouter(navigationController: navigationController)
+        let (viewController, _) = router.buildPostListBundle()
+        navigationController.viewControllers = [viewController]
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         
