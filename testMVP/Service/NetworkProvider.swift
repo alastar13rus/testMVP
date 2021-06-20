@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkProvider: UseCaseProvider {
+class NetworkProvider: PostUseCaseProvider {
     
     static let baseURL = "k8s-stage.apianon.ru"
     let networkAgent: NetworkAgent
