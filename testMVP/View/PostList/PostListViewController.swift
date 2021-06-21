@@ -213,4 +213,11 @@ extension PostListViewController: UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let postData = presenter.posts[indexPath.row]
+        presenter.didSelectItemTrigger(postData)
+        
+        
+    }
+    
 }

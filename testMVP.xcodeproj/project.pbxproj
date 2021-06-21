@@ -18,6 +18,14 @@
 		BB5C3ABC267D385C002B1D0E /* UserDefaultsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3ABB267D385C002B1D0E /* UserDefaultsProvider.swift */; };
 		BB5C3AC3267E28C5002B1D0E /* SortingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3AC2267E28C5002B1D0E /* SortingTableViewCell.swift */; };
 		BBB6C63C267E45C7009E3814 /* SortingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C63B267E45C7009E3814 /* SortingData.swift */; };
+		BBB6C647267FE1A6009E3814 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C646267FE1A6009E3814 /* PostDetailViewController.swift */; };
+		BBB6C64B267FE24C009E3814 /* PostDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C64A267FE24C009E3814 /* PostDetailPresenter.swift */; };
+		BBB6C64F267FEAA3009E3814 /* PostDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C64E267FEAA3009E3814 /* PostDetailData.swift */; };
+		BBB6C653267FEE6E009E3814 /* PostDetailPlainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C652267FEE6E009E3814 /* PostDetailPlainView.swift */; };
+		BBB6C65F267FF66F009E3814 /* PostDetailVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C65E267FF66F009E3814 /* PostDetailVideoView.swift */; };
+		BBB6C663267FF67D009E3814 /* PostDetailAudioCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C662267FF67D009E3814 /* PostDetailAudioCoverView.swift */; };
+		BBB6C6672680047D009E3814 /* PostDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C6662680047D009E3814 /* PostDetailContentView.swift */; };
+		BBB6C6712680D603009E3814 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C6702680D603009E3814 /* UIView+Extension.swift */; };
 		BBDF7CC2267947B800539526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC1267947B800539526 /* AppDelegate.swift */; };
 		BBDF7CC4267947B800539526 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC3267947B800539526 /* SceneDelegate.swift */; };
 		BBDF7CC6267947B800539526 /* PostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC5267947B800539526 /* PostListViewController.swift */; };
@@ -64,6 +72,14 @@
 		BB5C3ABB267D385C002B1D0E /* UserDefaultsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProvider.swift; sourceTree = "<group>"; };
 		BB5C3AC2267E28C5002B1D0E /* SortingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingTableViewCell.swift; sourceTree = "<group>"; };
 		BBB6C63B267E45C7009E3814 /* SortingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingData.swift; sourceTree = "<group>"; };
+		BBB6C646267FE1A6009E3814 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		BBB6C64A267FE24C009E3814 /* PostDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailPresenter.swift; sourceTree = "<group>"; };
+		BBB6C64E267FEAA3009E3814 /* PostDetailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailData.swift; sourceTree = "<group>"; };
+		BBB6C652267FEE6E009E3814 /* PostDetailPlainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailPlainView.swift; sourceTree = "<group>"; };
+		BBB6C65E267FF66F009E3814 /* PostDetailVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVideoView.swift; sourceTree = "<group>"; };
+		BBB6C662267FF67D009E3814 /* PostDetailAudioCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailAudioCoverView.swift; sourceTree = "<group>"; };
+		BBB6C6662680047D009E3814 /* PostDetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailContentView.swift; sourceTree = "<group>"; };
+		BBB6C6702680D603009E3814 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		BBDF7CBE267947B800539526 /* testMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBDF7CC1267947B800539526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBDF7CC3267947B800539526 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +158,18 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		BBB6C645267FE197009E3814 /* PostDetail */ = {
+			isa = PBXGroup;
+			children = (
+				BBB6C646267FE1A6009E3814 /* PostDetailViewController.swift */,
+				BBB6C652267FEE6E009E3814 /* PostDetailPlainView.swift */,
+				BBB6C65E267FF66F009E3814 /* PostDetailVideoView.swift */,
+				BBB6C662267FF67D009E3814 /* PostDetailAudioCoverView.swift */,
+				BBB6C6662680047D009E3814 /* PostDetailContentView.swift */,
+			);
+			path = PostDetail;
+			sourceTree = "<group>";
+		};
 		BBDF7CB5267947B800539526 = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +219,7 @@
 			children = (
 				BBDF7CDD26794D2900539526 /* PostListPresenter.swift */,
 				BB5C3AAF267D2EB7002B1D0E /* SortingPresenter.swift */,
+				BBB6C64A267FE24C009E3814 /* PostDetailPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -206,6 +235,7 @@
 		BBDF7CE32679531100539526 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BBB6C645267FE197009E3814 /* PostDetail */,
 				BB5C3AA0267D05C4002B1D0E /* Sorting */,
 				BB5C3A9D267D01A6002B1D0E /* PostList */,
 			);
@@ -266,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				BBDF7D06267999F500539526 /* PostData.swift */,
+				BBB6C64E267FEAA3009E3814 /* PostDetailData.swift */,
 				BBB6C63B267E45C7009E3814 /* SortingData.swift */,
 			);
 			path = Data;
@@ -279,6 +310,7 @@
 				BB5C3A79267CC595002B1D0E /* OptionalGender+Extension.swift */,
 				BB5C3A7E267CCF2C002B1D0E /* UITableView+Extension.swift */,
 				BB5C3A82267CDDB2002B1D0E /* Array+Extension.swift */,
+				BBB6C6702680D603009E3814 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -389,13 +421,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBB6C653267FEE6E009E3814 /* PostDetailPlainView.swift in Sources */,
+				BBB6C64B267FE24C009E3814 /* PostDetailPresenter.swift in Sources */,
 				BB5C3A7A267CC595002B1D0E /* OptionalGender+Extension.swift in Sources */,
+				BBB6C64F267FEAA3009E3814 /* PostDetailData.swift in Sources */,
 				BBDF7CDE26794D2900539526 /* PostListPresenter.swift in Sources */,
 				BBDF7CE82679542800539526 /* PostListRouter.swift in Sources */,
 				BB5C3ABC267D385C002B1D0E /* UserDefaultsProvider.swift in Sources */,
+				BBB6C65F267FF66F009E3814 /* PostDetailVideoView.swift in Sources */,
 				BB5C3AC3267E28C5002B1D0E /* SortingTableViewCell.swift in Sources */,
 				BB5C3A7F267CCF2C002B1D0E /* UITableView+Extension.swift in Sources */,
 				BBDF7D18267A02A300539526 /* PostPlainCoverTableViewCell.swift in Sources */,
+				BBB6C6672680047D009E3814 /* PostDetailContentView.swift in Sources */,
+				BBB6C647267FE1A6009E3814 /* PostDetailViewController.swift in Sources */,
 				BBDF7CC6267947B800539526 /* PostListViewController.swift in Sources */,
 				BB5C3A9A267D0058002B1D0E /* PostListTableView.swift in Sources */,
 				BBDF7CED267957EE00539526 /* Post.swift in Sources */,
@@ -409,9 +447,11 @@
 				BBDF7CC2267947B800539526 /* AppDelegate.swift in Sources */,
 				BB5C3A83267CDDB2002B1D0E /* Array+Extension.swift in Sources */,
 				BBDF7CFB267973E900539526 /* CustomError.swift in Sources */,
+				BBB6C663267FF67D009E3814 /* PostDetailAudioCoverView.swift in Sources */,
 				BBDF7CF42679648F00539526 /* NetworkProvider.swift in Sources */,
 				BBDF7D21267A0FC700539526 /* URL+Extension.swift in Sources */,
 				BBDF7D0F2679EF6900539526 /* Date+Extension.swift in Sources */,
+				BBB6C6712680D603009E3814 /* UIView+Extension.swift in Sources */,
 				BB5C3AAC267D2CEC002B1D0E /* SortingViewController.swift in Sources */,
 				BBDF7CC4267947B800539526 /* SceneDelegate.swift in Sources */,
 				BBDF7CF1267961E000539526 /* PostUseCaseProvider.swift in Sources */,

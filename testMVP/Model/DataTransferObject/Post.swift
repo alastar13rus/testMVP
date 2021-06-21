@@ -164,3 +164,7 @@ struct PostListResponseData: Decodable {
 struct PostListResponse: Decodable {
     let data: PostListResponseData
 }
+
+struct PostResponse: Decodable {
+    let data: Post
+}

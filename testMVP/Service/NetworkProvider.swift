@@ -65,4 +65,19 @@ class NetworkProvider: PostUseCaseProvider {
         networkAgent.request(url) { completion($0) }
     }
     
+    
+    func fetchPostDetail(_ detailID: String, completion: @escaping (Result<PostResponse, Error>) -> Void) {
+        
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = Self.baseURL
+        urlComponents.path = "/posts/v1/posts/\(detailID)"
+        
+        guard let url = urlComponents.url else {
+            completion(.failure(CustomError.invalidURL))
+            return
+        }
+        
+        networkAgent.request(url) { completion($0) }
+    }
 }
