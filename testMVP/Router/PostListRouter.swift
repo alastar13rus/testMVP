@@ -36,8 +36,22 @@ class PostListRouter {
         return (vc: vc, presenter: presenter)
     }
     
+    func buildPostDetailBundle(with detailID: String) -> (vc: PostDetailViewController, presenter: PostDetailPresenter) {
+        let vc = PostDetailViewController()
+        let networkProvider = NetworkProvider(networkAgent: NetworkAgent.shared)
+        let presenter = PostDetailPresenter(detailID: detailID, useCaseProvider: networkProvider, delegate: vc)
+        presenter.router = self
+        vc.presenter = presenter
+        return (vc: vc, presenter: presenter)
+    }
+    
     func toSortingScreen() {
         let(vc, _) = buildSortingBundle()
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func toPostDetailScreen(with detailID: String) {
+        let(vc, _) = buildPostDetailBundle(with: detailID)
         navigationController.pushViewController(vc, animated: true)
     }
     

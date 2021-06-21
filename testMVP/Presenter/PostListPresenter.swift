@@ -15,6 +15,7 @@ protocol PostListPresenterProtocol: class {
     func didFirstPageTriggerFired()
     func didNextPageTriggerFired()
     func presentSortingSettings()
+    func didSelectItemTrigger(_ selectedItem: PostData)
     
 }
 
@@ -72,12 +73,22 @@ class PostListPresenter: PostListPresenterProtocol {
         isFetching = true
         
         sortingUseCaseProvider.fetchSelectedSorting { [weak self] (sorting) in
-            guard let self = self, let sorting = sorting else { return }
+            guard let self = self else { return }
             
-//            guard self.sorting != sorting else {
-//                self.isFetching = false
-//                return
-//            }
+            guard let sorting = sorting else {
+                
+                let request = Request(first: self.state.perPage, after: nil, orderBy: self.sorting)
+                self.useCaseProvider.fetchFirstPosts(request) { [weak self] in
+                    self?.handle($0, isReplace: true)
+                }
+                
+                return
+            }
+            
+            guard (self.sorting != sorting) || (self.sorting == sorting && self.posts.isEmpty) else {
+                self.isFetching = false
+                return
+            }
             self.sorting = sorting
             
             let request = Request(first: self.state.perPage, after: nil, orderBy: sorting)
@@ -106,6 +117,11 @@ class PostListPresenter: PostListPresenterProtocol {
         router?.toSortingScreen()
     }
     
+    func didSelectItemTrigger(_ selectedItem: PostData) {
+        router?.toPostDetailScreen(with: selectedItem.id)
+    }
+    
+    
     private func handle(_ result: Result<PostListResponse, Error>, isReplace: Bool) {
         switch result {
         case .success(let response):
@@ -123,8 +139,7 @@ class PostListPresenter: PostListPresenterProtocol {
             }
             
         case .failure(let error):
-            fatalError(error.localizedDescription)
-        print(error.localizedDescription)
+            print(error.localizedDescription)
         }
     }
     
