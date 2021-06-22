@@ -18,24 +18,19 @@ class PostTableViewCell: UITableViewCell {
     
     let postHeaderView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .systemRed
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let postContentView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .systemBlue
         view.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-//        view.setContentHuggingPriority(.defaultHigh, for: .vertical)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let postFooterView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .systemYellow
-//        view.setContentHuggingPriority(.defaultHigh, for: .vertical)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -48,20 +43,10 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    let activityIndicator: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .large)
-        activity.startAnimating()
-        activity.hidesWhenStopped = true
-        activity.color = .systemBlue
-        activity.translatesAutoresizingMaskIntoConstraints = false
-        return activity
-    }()
-    
     let authorImageView: UIImageView = {
         let iv = UIImageView()
         iv.layer.cornerRadius = 10
         iv.clipsToBounds = true
-//        iv.backgroundColor = .systemGray5
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
@@ -71,7 +56,6 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 0
-//        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -140,8 +124,6 @@ class PostTableViewCell: UITableViewCell {
         super.prepareForReuse()
         
         authorImageView.image = nil
-        activityIndicator.startAnimating()
-        activityIndicator.isHidden = false
     }
     
     
@@ -159,14 +141,10 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(postFooterView)
         
         postHeaderView.addSubview(authorNameLabel)
-        postHeaderView.addSubview(activityIndicator)
         postHeaderView.addSubview(authorImageView)
 
         postContentView.addSubview(textContentLabel)
 
-//        postContentView.addSubview(postTypeLabel)
-//        postContentView.addSubview(postContents)
-//
         postFooterView.addSubview(createdAtLabel)
         postFooterView.addSubview(updatedAtLabel)
         postFooterView.addSubview(tagsLabel)
@@ -188,17 +166,10 @@ class PostTableViewCell: UITableViewCell {
             postContentView.topAnchor.constraint(equalTo: postHeaderView.bottomAnchor, constant: 12),
             postContentView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
             postContentView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -12),
-            
-//            postFooterView.topAnchor.constraint(equalTo: postContentView.bottomAnchor, constant: 12),
+
             postFooterView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
             postFooterView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -12),
             postFooterView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -12),
-            
-            activityIndicator.topAnchor.constraint(equalTo: postHeaderView.topAnchor),
-            activityIndicator.leftAnchor.constraint(equalTo: postHeaderView.leftAnchor),
-            activityIndicator.widthAnchor.constraint(equalToConstant: CGFloat(data.cellHeaderHeight)),
-            activityIndicator.heightAnchor.constraint(equalTo: authorImageView.widthAnchor),
-            activityIndicator.bottomAnchor.constraint(equalTo: postHeaderView.bottomAnchor),
             
             authorImageView.topAnchor.constraint(equalTo: postHeaderView.topAnchor),
             authorImageView.leftAnchor.constraint(equalTo: postHeaderView.leftAnchor),
@@ -224,14 +195,7 @@ class PostTableViewCell: UITableViewCell {
             
             tagsLabel.bottomAnchor.constraint(equalTo: postFooterView.bottomAnchor),
             tagsLabel.leftAnchor.constraint(equalTo: postFooterView.leftAnchor),
-            
-//
-//
-//            postTypeLabel.topAnchor.constraint(equalTo: isMyFavoriteLabel.bottomAnchor),
-//            postTypeLabel.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
-//
-//            postContents.topAnchor.constraint(equalTo: postTypeLabel.bottomAnchor),
-//            postContents.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
+
         ])
     }
     
@@ -248,24 +212,10 @@ class PostTableViewCell: UITableViewCell {
         postTypeLabel.text = data.typeString
         postContents.text = data.contentsString
         
-        if let url = data.imageContentURL {
-            
-            url.downloadImageData { [weak self] (imageData) in
-                
-                guard let self = self else { return }
-                self.activityIndicator.stopAnimating()
-                
-                guard let imageData = imageData else {
-                    self.authorImageView.image = data.authorGender.getImage()
-                    return
-                }
-                
-                self.authorImageView.image = UIImage(data: imageData)
+        authorImageView.setImage(with: data.imageContentURL) { [weak self] (success) in
+            if !success {
+                self?.authorImageView.image = data.authorGender.getImage()
             }
-        } else {
-
-            self.activityIndicator.stopAnimating()
-            authorImageView.image = data.authorGender.getImage()
         }
     }
 }

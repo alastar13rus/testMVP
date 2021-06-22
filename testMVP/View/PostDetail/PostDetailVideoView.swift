@@ -43,12 +43,7 @@ class PostDetailVideoView: PostDetailContentView {
     override func configure(with data: PostDetailData) {
         super.configure(with: data)
         
-        if let url = data.videoContent?.previewImageURL {
-            url.downloadImageData { [weak self] (imageData) in
-                guard let self = self, let imageData = imageData else { return }
-                self.previewImageView.image = UIImage(data: imageData)
-            }
-        }
+        previewImageView.setImage(with: data.videoContent?.previewImageURL)
         
         setupPlayer(with: data)
         setupPlayerVC(player)

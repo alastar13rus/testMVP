@@ -34,20 +34,18 @@ class PostPlainCoverTableViewCell: PostTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageGifContentImageView.image = nil
-        imageGifContentImageView.removeFromSuperview()
     }
     
 //    MARK: - Methods
     override func configure(with data: PostData) {
         super.configure(with: data)
         
-        if let url = data.imageGifContentURL {
-            url.downloadImageData { [weak self] (imageData) in
-                guard let self = self, let imageData = imageData else { return }
-                self.imageGifContentImageView.image = UIImage(data: imageData)
+        imageGifContentImageView.setImage(with: data.imageGifContentURL) { [weak self] (success) in
+            if success {
+                guard let self = self else { return }
+                self.postContentView.addSubview(self.imageGifContentImageView)
+                NSLayoutConstraint.activate(self.imageGifContentConstraints)
             }
-            postContentView.addSubview(imageGifContentImageView)
-            NSLayoutConstraint.activate(imageGifContentConstraints)
         }
         
     }

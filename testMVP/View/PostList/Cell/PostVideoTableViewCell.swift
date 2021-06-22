@@ -34,8 +34,6 @@ class PostVideoTableViewCell: PostTableViewCell {
         super.prepareForReuse()
         
         previewImageView.image = nil
-//        previewImageView.removeFromSuperview()
-//        videoDurationLabel.removeFromSuperview()
     }
     
 //    MARK: - Methods
@@ -45,12 +43,8 @@ class PostVideoTableViewCell: PostTableViewCell {
         setupConstraints(data)
         
         videoDurationLabel.text = data.videoContent?.duration ?? ""
-        if let url = data.videoContent?.previewImageURL {
-            url.downloadImageData { [weak self] (imageData) in
-                guard let self = self, let imageData = imageData else { return }
-                self.previewImageView.image = UIImage(data: imageData)
-            }
-        }
+        previewImageView.setImage(with: data.videoContent?.previewImageURL)
+        
     }
     
     override func setupHierarhy() {
