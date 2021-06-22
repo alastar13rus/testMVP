@@ -143,7 +143,7 @@ class PostListViewController: UIViewController, PostListView {
 
     @objc private func handleRefresh(_ sender: UIRefreshControl) {
         sender.beginRefreshing()
-        presenter.didFirstPageTriggerFired()
+        presenter.didRefreshTriggerFired()
     }
     
     @objc private func sortingSettingsButtonPressed(_ sender: UIBarButtonItem) {

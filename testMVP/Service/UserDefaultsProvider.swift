@@ -87,7 +87,7 @@ class UserDefaultsProvider: SortingUseCaseProvider {
         saveSortingItems(sortingItems) {  completion($0) }
     }
     
-    func saveSelectedSorting(_ sorting: Sorting, completion: (() -> Void)?) {
+    func saveSelectedSorting(_ sorting: Sorting, completion: (() -> Void)? = nil) {
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let self = self else { return }
             

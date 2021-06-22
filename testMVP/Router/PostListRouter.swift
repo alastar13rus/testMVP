@@ -7,7 +7,18 @@
 
 import UIKit
 
-class PostListRouter {
+protocol PostListRoutable: class {
+    func toSortingScreen()
+    func toPostDetailScreen(with detailID: String)
+}
+
+protocol PostListBuildable: class {
+    func buildPostListBundle() -> (vc: PostListViewController, presenter: PostListPresenter)
+    func buildSortingBundle() -> (vc: SortingViewController, presenter: SortingPresenter)
+    func buildPostDetailBundle(with detailID: String) -> (vc: PostDetailViewController, presenter: PostDetailPresenter)
+}
+
+class PostListRouter: PostListRoutable, PostListBuildable {
     
 //    MARK: - Properties
     let navigationController: UINavigationController
