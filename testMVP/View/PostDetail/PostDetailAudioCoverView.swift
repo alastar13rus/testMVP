@@ -29,6 +29,7 @@ class PostDetailAudioCoverView: PostDetailContentView {
         button.contentMode = .scaleAspectFill
         button.contentHorizontalAlignment = .fill
         button.contentVerticalAlignment = .fill
+        button.backgroundColor = .white
         button.setImage(#imageLiteral(resourceName: "play"), for: .normal)
         button.addTarget(self, action: #selector(handlePlayVideo(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -37,6 +38,7 @@ class PostDetailAudioCoverView: PostDetailContentView {
     
     lazy var slider: UISlider = {
         let slider = UISlider()
+        slider.addTarget(self, action: #selector(handleRewind(_:)), for: .valueChanged)
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
@@ -46,12 +48,7 @@ class PostDetailAudioCoverView: PostDetailContentView {
     override func configure(with data: PostDetailData) {
         super.configure(with: data)
         
-        if let url = data.imageContentURL {
-            url.downloadImageData { [weak self] (imageData) in
-                guard let self = self, let imageData = imageData else { return }
-                self.audioCoverImageView.image = UIImage(data: imageData)
-            }
-        }
+        audioCoverImageView.setImage(with: data.imageContentURL)
         
         setupPlayer(with: data)
         setupSlider(with: data)
@@ -100,7 +97,11 @@ class PostDetailAudioCoverView: PostDetailContentView {
             
         default: break
         }
-        
+    }
+    
+    @objc private func handleRewind(_ sender: UISlider) {
+        guard let player = self.player else { return }
+        player.seek(to: CMTime(seconds: Double(sender.value), preferredTimescale: 1000))
     }
     
     private func setupPlayer(with data: PostDetailData) {

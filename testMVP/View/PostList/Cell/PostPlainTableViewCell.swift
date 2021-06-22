@@ -55,6 +55,7 @@ class PostPlainTableViewCell: PostTableViewCell {
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
+        iv.setContentHuggingPriority(.defaultLow, for: .horizontal)
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
@@ -85,51 +86,34 @@ class PostPlainTableViewCell: PostTableViewCell {
         imageContentImageView.image = nil
         secondImageContentImageView.image = nil
         imageGifContentImageView.image = nil
-        
-//        NSLayoutConstraint.deactivate(imageContentConstraints)
-//        NSLayoutConstraint.deactivate(secondImageContentConstraints)
-//        NSLayoutConstraint.deactivate(imageGifContentConstraints)
-        
-        imageContentImageView.removeFromSuperview()
-        secondImageContentImageView.removeFromSuperview()
-        imageGifContentImageView.removeFromSuperview()
-        layoutSubviews()
     }
     
 //    MARK: - Methods
     override func configure(with data: PostData) {
         super.configure(with: data)
         
-        if let url = data.imageContentURL {
-            url.downloadImageData { [weak self] (imageData) in
-                guard let self = self, let imageData = imageData else { return }
-                self.imageContentImageView.image = UIImage(data: imageData)
+        imageContentImageView.setImage(with: data.imageContentURL) { [weak self] (success) in
+            if success {
+                guard let self = self else { return }
+                self.postContentView.addSubview(self.imageContentImageView)
+                NSLayoutConstraint.activate(self.imageContentConstraints)
             }
-            postContentView.addSubview(imageContentImageView)
-            NSLayoutConstraint.activate(imageContentConstraints)
-            layoutIfNeeded()
         }
         
-        if let url = data.secondImageContentURL {
-            url.downloadImageData { [weak self] (imageData) in
-                guard let self = self, let imageData = imageData else { return }
-                self.secondImageContentImageView.image = UIImage(data: imageData)
+        secondImageContentImageView.setImage(with: data.secondImageContentURL) { [weak self] (success) in
+            if success {
+                guard let self = self else { return }
+                self.postContentView.addSubview(self.secondImageContentImageView)
+                NSLayoutConstraint.activate(self.secondImageContentConstraints)
             }
-            postContentView.addSubview(secondImageContentImageView)
-            NSLayoutConstraint.activate(secondImageContentConstraints)
-            layoutIfNeeded()
         }
         
-        if let url = data.imageGifContentURL {
-            url.downloadImageData { [weak self] (imageData) in
-                guard let self = self, let imageData = imageData else { return }
-                self.imageGifContentImageView.image = UIImage(data: imageData)
+        imageGifContentImageView.setImage(with: data.imageGifContentURL) { [weak self] (success) in
+            if success {
+                guard let self = self else { return }
+                self.postContentView.addSubview(self.imageGifContentImageView)
+                NSLayoutConstraint.activate(self.imageGifContentConstraints)
             }
-            postContentView.addSubview(imageGifContentImageView)
-            NSLayoutConstraint.activate(imageGifContentConstraints)
-            layoutIfNeeded()
         }
-        
-        
     }
 }

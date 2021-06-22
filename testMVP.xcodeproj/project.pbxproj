@@ -26,6 +26,8 @@
 		BBB6C663267FF67D009E3814 /* PostDetailAudioCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C662267FF67D009E3814 /* PostDetailAudioCoverView.swift */; };
 		BBB6C6672680047D009E3814 /* PostDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C6662680047D009E3814 /* PostDetailContentView.swift */; };
 		BBB6C6712680D603009E3814 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C6702680D603009E3814 /* UIView+Extension.swift */; };
+		BBB6C67926814C4F009E3814 /* ImageCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C67826814C4F009E3814 /* ImageCacheProvider.swift */; };
+		BBB6C67D2681565F009E3814 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6C67C2681565F009E3814 /* UIImageView+Extension.swift */; };
 		BBDF7CC2267947B800539526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC1267947B800539526 /* AppDelegate.swift */; };
 		BBDF7CC4267947B800539526 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC3267947B800539526 /* SceneDelegate.swift */; };
 		BBDF7CC6267947B800539526 /* PostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7CC5267947B800539526 /* PostListViewController.swift */; };
@@ -45,7 +47,6 @@
 		BBDF7D152679FFE800539526 /* PostPlainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D142679FFE800539526 /* PostPlainTableViewCell.swift */; };
 		BBDF7D18267A02A300539526 /* PostPlainCoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D17267A02A300539526 /* PostPlainCoverTableViewCell.swift */; };
 		BBDF7D1E267A0D2100539526 /* PostVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D1D267A0D2100539526 /* PostVideoTableViewCell.swift */; };
-		BBDF7D21267A0FC700539526 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDF7D20267A0FC700539526 /* URL+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		BBB6C662267FF67D009E3814 /* PostDetailAudioCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailAudioCoverView.swift; sourceTree = "<group>"; };
 		BBB6C6662680047D009E3814 /* PostDetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailContentView.swift; sourceTree = "<group>"; };
 		BBB6C6702680D603009E3814 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		BBB6C67826814C4F009E3814 /* ImageCacheProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheProvider.swift; sourceTree = "<group>"; };
+		BBB6C67C2681565F009E3814 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		BBDF7CBE267947B800539526 /* testMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBDF7CC1267947B800539526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBDF7CC3267947B800539526 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +104,6 @@
 		BBDF7D142679FFE800539526 /* PostPlainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPlainTableViewCell.swift; sourceTree = "<group>"; };
 		BBDF7D17267A02A300539526 /* PostPlainCoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPlainCoverTableViewCell.swift; sourceTree = "<group>"; };
 		BBDF7D1D267A0D2100539526 /* PostVideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVideoTableViewCell.swift; sourceTree = "<group>"; };
-		BBDF7D20267A0FC700539526 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 				BB5C3ABB267D385C002B1D0E /* UserDefaultsProvider.swift */,
 				BBDF7CF32679648F00539526 /* NetworkProvider.swift */,
 				BBDF7CF6267965B000539526 /* NetworkAgent.swift */,
+				BBB6C67826814C4F009E3814 /* ImageCacheProvider.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -306,11 +309,11 @@
 			isa = PBXGroup;
 			children = (
 				BBDF7D0E2679EF6900539526 /* Date+Extension.swift */,
-				BBDF7D20267A0FC700539526 /* URL+Extension.swift */,
 				BB5C3A79267CC595002B1D0E /* OptionalGender+Extension.swift */,
 				BB5C3A7E267CCF2C002B1D0E /* UITableView+Extension.swift */,
 				BB5C3A82267CDDB2002B1D0E /* Array+Extension.swift */,
 				BBB6C6702680D603009E3814 /* UIView+Extension.swift */,
+				BBB6C67C2681565F009E3814 /* UIImageView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				BBB6C647267FE1A6009E3814 /* PostDetailViewController.swift in Sources */,
 				BBDF7CC6267947B800539526 /* PostListViewController.swift in Sources */,
 				BB5C3A9A267D0058002B1D0E /* PostListTableView.swift in Sources */,
+				BBB6C67D2681565F009E3814 /* UIImageView+Extension.swift in Sources */,
 				BBDF7CED267957EE00539526 /* Post.swift in Sources */,
 				BBDF7D152679FFE800539526 /* PostPlainTableViewCell.swift in Sources */,
 				BB5C3AB8267D3786002B1D0E /* SortingUseCaseProvider.swift in Sources */,
@@ -444,12 +448,12 @@
 				BBDF7CFE2679742600539526 /* Request.swift in Sources */,
 				BB5C3AB0267D2EB7002B1D0E /* SortingPresenter.swift in Sources */,
 				BBDF7D122679FFD500539526 /* PostAudioCoverTableViewCell.swift in Sources */,
+				BBB6C67926814C4F009E3814 /* ImageCacheProvider.swift in Sources */,
 				BBDF7CC2267947B800539526 /* AppDelegate.swift in Sources */,
 				BB5C3A83267CDDB2002B1D0E /* Array+Extension.swift in Sources */,
 				BBDF7CFB267973E900539526 /* CustomError.swift in Sources */,
 				BBB6C663267FF67D009E3814 /* PostDetailAudioCoverView.swift in Sources */,
 				BBDF7CF42679648F00539526 /* NetworkProvider.swift in Sources */,
-				BBDF7D21267A0FC700539526 /* URL+Extension.swift in Sources */,
 				BBDF7D0F2679EF6900539526 /* Date+Extension.swift in Sources */,
 				BBB6C6712680D603009E3814 /* UIView+Extension.swift in Sources */,
 				BB5C3AAC267D2CEC002B1D0E /* SortingViewController.swift in Sources */,

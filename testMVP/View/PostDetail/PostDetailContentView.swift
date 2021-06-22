@@ -12,14 +12,12 @@ class PostDetailContentView: UIView {
 //    MARK: - Properties
     let authorContentView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .systemGray4
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let postContentView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .systemBlue
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -29,7 +27,6 @@ class PostDetailContentView: UIView {
         stack.distribution = .fillProportionally
         stack.axis = .horizontal
         stack.alignment = .center
-//        stack.backgroundColor = .systemGray5
         stack.layer.cornerRadius = 10
         stack.clipsToBounds = true
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +35,6 @@ class PostDetailContentView: UIView {
     
     let footerContentView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .systemYellow
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -50,7 +46,6 @@ class PostDetailContentView: UIView {
         view.clipsToBounds = true
         view.layer.borderColor = UIColor.systemGray5.cgColor
         view.layer.borderWidth = 5
-//        view.backgroundColor = .systemPink
         view.contentMode = .scaleAspectFill
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -60,22 +55,10 @@ class PostDetailContentView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.numberOfLines = 1
-        label.text = "adfakdnm kfnakdn"
-//        label.backgroundColor = .systemGreen
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    let activityIndicator: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .large)
-        activity.startAnimating()
-        activity.hidesWhenStopped = true
-//        activity.color = .systemBlue
-        activity.translatesAutoresizingMaskIntoConstraints = false
-        return activity
-    }()
 
-    
     let textContentLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
@@ -260,27 +243,11 @@ class PostDetailContentView: UIView {
         updatedAtLabel.text = data.updatedAtString
         tagsLabel.text = data.tagsContent
         
-        
-        if let url = data.imageContentURL {
-            
-            url.downloadImageData { [weak self] (imageData) in
-                
-                guard let self = self else { return }
-                self.activityIndicator.stopAnimating()
-                
-                guard let imageData = imageData else {
-                    self.authorImageView.image = data.authorGender.getImage()
-                    return
-                }
-                
-                self.authorImageView.image = UIImage(data: imageData)
+        authorImageView.setImage(with: data.imageContentURL) { [weak self] (success) in
+            if !success {
+                self?.authorImageView.image = data.authorGender.getImage()
             }
-        } else {
-
-            self.activityIndicator.stopAnimating()
-            authorImageView.image = data.authorGender.getImage()
         }
-        
     }
     
     func setupUI() {
@@ -293,7 +260,6 @@ class PostDetailContentView: UIView {
         addSubview(socialContentStackView)
         addSubview(footerContentView)
         
-        authorContentView.addSubview(activityIndicator)
         authorContentView.addSubview(authorImageView)
         authorContentView.addSubview(authorNameLabel)
         
@@ -347,13 +313,6 @@ class PostDetailContentView: UIView {
             footerContentView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
             footerContentView.heightAnchor.constraint(equalToConstant: 50),
             footerContentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            
-            
-            activityIndicator.topAnchor.constraint(equalTo: authorContentView.topAnchor),
-            activityIndicator.leftAnchor.constraint(equalTo: authorContentView.leftAnchor),
-            activityIndicator.heightAnchor.constraint(equalToConstant: 100),
-            activityIndicator.heightAnchor.constraint(equalTo: authorImageView.widthAnchor),
-            activityIndicator.bottomAnchor.constraint(equalTo: authorContentView.bottomAnchor),
             
             authorImageView.topAnchor.constraint(equalTo: authorContentView.topAnchor),
             authorImageView.leftAnchor.constraint(equalTo: authorContentView.leftAnchor),

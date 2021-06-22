@@ -33,8 +33,6 @@ class PostAudioCoverTableViewCell: PostTableViewCell {
             super.prepareForReuse()
             
             audioCoverImageView.image = nil
-//            audioCoverImageView.removeFromSuperview()
-//            durationLabel.removeFromSuperview()
         }
     
 //    MARK: - Methods
@@ -45,15 +43,8 @@ class PostAudioCoverTableViewCell: PostTableViewCell {
         setupConstraints(data)
         
         durationLabel.text = data.audioContent?.duration ?? ""
-        if let url = data.imageContentURL {
-            url.downloadImageData { [weak self] (imageData) in
-                guard let self = self else { return }
-                guard let imageData = imageData else {
-                    return
-                }
-                self.audioCoverImageView.image = UIImage(data: imageData)
-            }
-        }
+        
+        audioCoverImageView.setImage(with: data.imageContentURL)
     }
     
     override func setupHierarhy() {
