@@ -138,7 +138,9 @@ class PostListPresenter: PostListPresenterProtocol {
             }
             
         case .failure(let error):
-            print(error.localizedDescription)
+            router?.showAlert(with: "Error", message: error.localizedDescription) { [weak self] in
+                self?.isFetching = false
+            }
         }
     }
     

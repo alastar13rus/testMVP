@@ -19,7 +19,7 @@ class NetworkAgent {
             
             DispatchQueue.global(qos: .background).async {
                 
-                guard error == nil else { return }
+                guard error == nil else { return DispatchQueue.main.async { completion(.failure(error!)) } }
                 guard response != nil else { return }
                 guard let data = data else { return }
                 

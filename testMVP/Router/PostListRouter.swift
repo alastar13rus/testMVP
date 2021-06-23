@@ -10,6 +10,7 @@ import UIKit
 protocol PostListRoutable: class {
     func toSortingScreen()
     func toPostDetailScreen(with detailID: String)
+    func showAlert(with title: String, message: String, completion: (() -> Void)?)
 }
 
 protocol PostListBuildable: class {
@@ -64,6 +65,13 @@ class PostListRouter: PostListRoutable, PostListBuildable {
     func toPostDetailScreen(with detailID: String) {
         let(vc, _) = buildPostDetailBundle(with: detailID)
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showAlert(with title: String, message: String, completion: (() -> Void)?) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ок", style: .default, handler: nil)
+        alertVC.addAction(action)
+        navigationController.topViewController?.present(alertVC, animated: true, completion: completion)
     }
     
 }
