@@ -1,6 +1,6 @@
-# mvpTest
-[![CI](https://github.com/alastar13rus/mvpTest/actions/workflows/CI.yml/badge.svg)](https://github.com/alastar13rus/mvpTest/actions/workflows/CI.yml)
-![GitHub last commit](https://img.shields.io/github/last-commit/alastar13rus/mvpTest?style=plastic)
+# testMVP
+[![CI](https://github.com/alastar13rus/mvpTest/actions/workflows/CI.yml/badge.svg)](https://github.com/alastar13rus/testMVP/actions/workflows/CI.yml)
+![GitHub last commit](https://img.shields.io/github/last-commit/alastar13rus/testMVP?style=plastic)
 ![Swift](https://img.shields.io/badge/Swift-5.3-green)
 
 
