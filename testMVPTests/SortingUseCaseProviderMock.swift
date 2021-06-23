@@ -23,24 +23,28 @@ class SortingUseCaseProviderMock: SortingUseCaseProvider {
     
 //    MARK: - Methods
     
-    func fetchSortingItems(_ completion: @escaping ([SortingData]) -> Void) {
-
+    func fetchSortingItems() -> [SortingData] {
+        return []
     }
     
-    func fetchSelectedSorting(_ completion: @escaping (Sorting?) -> Void) {
-        completion(selectedSorting)
+    func fetchSelectedSorting() -> Sorting {
+        return selectedSorting ?? saveDefaultSelectedSorting()
     }
     
-    func saveSelectedSorting(_ sorting: Sorting, completion: (() -> Void)?) {
+    func saveSelectedSorting(_ sorting: Sorting) {
         self.selectedSorting = sorting
     }
     
-    func saveSortingItems(_ sortingItems: [SortingData], _ completion: @escaping ([SortingData]) -> Void) {
-        
+    func saveSortingItems(_ sortingItems: [SortingData]) -> [SortingData] {
+        return []
     }
     
-    func saveDefaultSortingItems(_ completion: @escaping ([SortingData]) -> Void) {
-        
+    func saveDefaultSortingItems() -> [SortingData] {
+        return []
+    }
+    
+    func saveDefaultSelectedSorting() -> Sorting {
+        return .createdAt
     }
     
     

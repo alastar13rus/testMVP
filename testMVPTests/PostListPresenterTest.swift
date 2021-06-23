@@ -39,10 +39,10 @@ class PostListPresenterTest: XCTestCase {
         
         //        Then
         XCTAssertEqual(presenter.state, State(perPage: 10, currentCursor: nil))
-        XCTAssertEqual(presenter.sorting, .mostPopular)
+        XCTAssertEqual(presenter.sorting, .createdAt)
         XCTAssertFalse(presenter.isFetching)
         XCTAssertTrue(presenter.posts.isEmpty)
-        XCTAssertEqual(presenter.sortingName, "По популярности")
+        XCTAssertEqual(presenter.sortingName, "По дате создания")
     }
     
     /// Если isFetching установлен в true, запроса первой партии постов не происходит
@@ -72,16 +72,14 @@ class PostListPresenterTest: XCTestCase {
         XCTAssertEqual(postUseCaseProvider.numberOfStartsFetchFirstPostsMethod, 0)
     }
     
-    /// Если isFetching установлен в false и selectedSorting совпадает с текущим, запроса первой партии постов не происходит
-        func test_didFirstPageTriggerFired_whenFetchingIsFalse_andSortingIsTheSame_thenNoFetch() throws {
+    /// Если isFetching установлен в false, selectedSorting совпадает с текущим, и есть загруженные посты, запроса первой партии постов не происходит
+        func test_didFirstPageTriggerFired_whenFetchingIsFalse_andSortingIsTheSame_andPostsIsNotEmpty_thenNoFetch() throws {
             
             //        Given
-            sortingUseCaseProvider = SortingUseCaseProviderMock(selectedSorting: .mostPopular)
+            sortingUseCaseProvider = SortingUseCaseProviderMock(selectedSorting: .createdAt)
             presenter = PostListPresenter(useCaseProvider: postUseCaseProvider, sortingUseCaseProvider: sortingUseCaseProvider, delegate: nil)
             
             XCTAssertEqual(postUseCaseProvider.numberOfStartsFetchFirstPostsMethod, 0)
-            
-            //        When
             
             let expectation = self.expectation(description: #function)
             
@@ -92,28 +90,40 @@ class PostListPresenterTest: XCTestCase {
             }
             
             waitForExpectations(timeout: 3)
-            
-            //        Then
-            XCTAssertEqual(postUseCaseProvider.numberOfStartsFetchFirstPostsMethod, 0)
-            XCTAssertFalse(presenter.isFetching)
-            
-        }
-    
-    /// Если isFetching установлен в false и selectedSorting в UserDefaults не установлен, происходит запрос первой партии постов и установка selectedSorting в  UserDefaults
-        func test_didFirstPageTriggerFired_whenFetchingIsFalse_andSelectedSortingIsNil_thenFetchCompleted() throws {
-            
-            //        Given
-            sortingUseCaseProvider = SortingUseCaseProviderMock(selectedSorting: .none)
-            presenter = PostListPresenter(useCaseProvider: postUseCaseProvider, sortingUseCaseProvider: sortingUseCaseProvider, delegate: nil)
-            presenter.setupSorting(.createdAt)
-            presenter.setupState(newState: State(perPage: 5, currentCursor: nil))
-            XCTAssertEqual(postUseCaseProvider.numberOfStartsFetchFirstPostsMethod, 0)
-            XCTAssertEqual(presenter.sorting, .createdAt)
-            XCTAssertEqual(sortingUseCaseProvider.selectedSorting, .none)
+            XCTAssertFalse(presenter.posts.isEmpty)
+            XCTAssertEqual(postUseCaseProvider.numberOfStartsFetchFirstPostsMethod, 1)
 
             
             //        When
             
+            let expectation2 = self.expectation(description: #function)
+            
+            presenter.didFirstPageTriggerFired()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+                expectation2.fulfill()
+            }
+            
+            waitForExpectations(timeout: 3)
+            
+            //        Then
+            XCTAssertEqual(postUseCaseProvider.numberOfStartsFetchFirstPostsMethod, 1)
+            XCTAssertFalse(presenter.isFetching)
+            
+        }
+    
+    /// Если isFetching установлен в false, selectedSorting совпадает с текущим, но загруженных постов нет, происходит запрос первой партии постов
+        func test_didFirstPageTriggerFired_whenFetchingIsFalse_andSortingIsTheSame_andPostsIsEmpty_thenFetchCompleted() throws {
+            
+            //        Given
+            sortingUseCaseProvider = SortingUseCaseProviderMock(selectedSorting: .createdAt)
+            presenter = PostListPresenter(useCaseProvider: postUseCaseProvider, sortingUseCaseProvider: sortingUseCaseProvider, delegate: nil)
+            
+            XCTAssertEqual(postUseCaseProvider.numberOfStartsFetchFirstPostsMethod, 0)
+            presenter.setupSorting(.createdAt)
+            
+            //        When
+            
             let expectation = self.expectation(description: #function)
             
             presenter.didFirstPageTriggerFired()
@@ -125,10 +135,7 @@ class PostListPresenterTest: XCTestCase {
             waitForExpectations(timeout: 3)
             
             //        Then
-            
             XCTAssertEqual(postUseCaseProvider.numberOfStartsFetchFirstPostsMethod, 1)
-            XCTAssertEqual(presenter.sorting, .createdAt)
-            XCTAssertEqual(sortingUseCaseProvider.selectedSorting, .createdAt)
             XCTAssertFalse(presenter.isFetching)
             
         }

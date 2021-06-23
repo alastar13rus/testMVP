@@ -62,6 +62,8 @@ class PostListPresenter: PostListPresenterProtocol {
         self.useCaseProvider = useCaseProvider
         self.sortingUseCaseProvider = sortingUseCaseProvider
         self.delegate = delegate
+        
+        self.sorting = sortingUseCaseProvider.fetchSelectedSorting()
     }
     
     
@@ -71,26 +73,20 @@ class PostListPresenter: PostListPresenterProtocol {
         guard !isFetching else { return }
         isFetching = true
         
-        sortingUseCaseProvider.fetchSelectedSorting { [weak self] (selectedSorting) in
-            guard let self = self else { return }
-            
-            guard self.sorting != selectedSorting else {
-                self.isFetching = false
-                return
-            }
-            
-            if selectedSorting != nil {
-                self.sorting = selectedSorting!
-            } else {
-                self.sortingUseCaseProvider.saveSelectedSorting(self.sorting, completion: nil)
-            }
-            
-            let request = Request(first: self.state.perPage, after: nil, orderBy: self.sorting)
-            self.useCaseProvider.fetchFirstPosts(request) { [weak self] in
-                self?.handle($0, isReplace: true)
-            }
+        let selectedSorting = sortingUseCaseProvider.fetchSelectedSorting()
+        if (self.sorting == selectedSorting) && (!self.posts.isEmpty) {
+            self.isFetching = false
+            return
+        }
+        
+        if (self.sorting != selectedSorting) { self.sorting = selectedSorting }
+        
+        let request = Request(first: self.state.perPage, after: nil, orderBy: self.sorting)
+        self.useCaseProvider.fetchFirstPosts(request) { [weak self] in
+            self?.handle($0, isReplace: true)
         }
     }
+    
     
     func didNextPageTriggerFired() {
         guard !isFetching else { return }
