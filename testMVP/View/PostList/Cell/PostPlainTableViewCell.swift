@@ -87,6 +87,10 @@ class PostPlainTableViewCell: PostTableViewCell {
         imageContentImageView.image = nil
         secondImageContentImageView.image = nil
         imageGifContentImageView.image = nil
+        
+        imageContentImageView.removeFromSuperview()
+        secondImageContentImageView.removeFromSuperview()
+        imageGifContentImageView.removeFromSuperview()
 
     }
     
@@ -96,7 +100,7 @@ class PostPlainTableViewCell: PostTableViewCell {
         
         imageContentImageView.setImage(with: data.imageContentURL) { [weak self] (isSuccess) in
             guard let self = self else { return }
-            guard isSuccess, self.tag == self.indexPath.row else { return }
+            guard isSuccess, self.tag == self.indexPath.row else { return NSLayoutConstraint.deactivate(self.imageContentConstraints) }
             
             self.secondImageContentImageView.setImage(with: data.secondImageContentURL) { [weak self] (isSuccess) in
                 guard let self = self else { return }
@@ -105,6 +109,7 @@ class PostPlainTableViewCell: PostTableViewCell {
                     NSLayoutConstraint.activate(self.imageContentConstraints)
                     return
                 }
+                
                 
                 self.postContentView.addSubview(self.imageContentImageView)
                 self.postContentView.addSubview(self.secondImageContentImageView)
