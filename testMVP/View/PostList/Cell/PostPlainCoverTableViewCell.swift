@@ -40,12 +40,12 @@ class PostPlainCoverTableViewCell: PostTableViewCell {
     override func configure(with data: PostData) {
         super.configure(with: data)
         
-        imageGifContentImageView.setImage(with: data.imageGifContentURL) { [weak self] (success) in
-            if success {
-                guard let self = self else { return }
-                self.postContentView.addSubview(self.imageGifContentImageView)
-                NSLayoutConstraint.activate(self.imageGifContentConstraints)
-            }
+        imageGifContentImageView.setImage(with: data.imageGifContentURL) { [weak self] (isSuccess) in
+            guard let self = self else { return }
+            guard isSuccess, self.tag == self.indexPath.row else { return NSLayoutConstraint.deactivate(self.imageGifContentConstraints) }
+            
+            self.postContentView.addSubview(self.imageGifContentImageView)
+            NSLayoutConstraint.activate(self.imageGifContentConstraints)
         }
         
     }

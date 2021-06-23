@@ -16,6 +16,8 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
+    var indexPath: IndexPath!
+    
     let postHeaderView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false

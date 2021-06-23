@@ -123,6 +123,7 @@ class PostListViewController: UIViewController, PostListView {
     func updatePartialData(newList: [PostData], oldList: [PostData]) {
         refreshControl.endRefreshing()
         tableView.reloadDataWithAnimation(newList: newList, oldList: oldList)
+        updateSortingName()
     }
     
     func updateSortingName() {
@@ -168,21 +169,29 @@ extension PostListViewController: UITableViewDataSource {
         switch cellType {
         case .plain:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostPlainTableViewCell.self)) as? PostPlainTableViewCell else { return UITableViewCell() }
+            cell.indexPath = indexPath
+            cell.tag = indexPath.row
             cell.postData = presenter.posts[indexPath.row]
             return cell
             
         case .plainCover:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostPlainCoverTableViewCell.self)) as? PostPlainCoverTableViewCell else { return UITableViewCell() }
+            cell.indexPath = indexPath
+            cell.tag = indexPath.row
             cell.postData = presenter.posts[indexPath.row]
             return cell
             
         case .audioCover:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostAudioCoverTableViewCell.self)) as? PostAudioCoverTableViewCell else { return UITableViewCell() }
+            cell.indexPath = indexPath
+            cell.tag = indexPath.row
             cell.postData = presenter.posts[indexPath.row]
             return cell
             
         case .video:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostVideoTableViewCell.self)) as? PostVideoTableViewCell else { return UITableViewCell() }
+            cell.indexPath = indexPath
+            cell.tag = indexPath.row
             cell.postData = presenter.posts[indexPath.row]
             return cell
             

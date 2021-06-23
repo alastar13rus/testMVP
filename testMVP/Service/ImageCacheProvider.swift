@@ -34,7 +34,7 @@ class ImageCacheProvider {
         lock.lock()
         defer { lock.unlock() }
         guard let image = imageCache.object(forKey: url.absoluteString as NSString) else { return nil }
-        print("\nПолучение из кэша. \n\tКлюч:\t\(url)\n")
+//        print("\nПолучение из кэша. \n\tКлюч:\t\(url)\n")
         return image
     }
     
