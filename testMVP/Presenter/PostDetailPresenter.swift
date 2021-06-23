@@ -49,7 +49,7 @@ class PostDetailPresenter: PostDetailPresenterProtocol {
         case .success(let postDetail):
             self.postDetailData = PostDetailData(postDetail.data)
         case .failure(let error):
-            fatalError(error.localizedDescription)
+            router?.showAlert(with: "Error", message: error.localizedDescription, completion: nil)
         }
     }
     

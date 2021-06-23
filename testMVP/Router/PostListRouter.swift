@@ -7,7 +7,19 @@
 
 import UIKit
 
-class PostListRouter {
+protocol PostListRoutable: class {
+    func toSortingScreen()
+    func toPostDetailScreen(with detailID: String)
+    func showAlert(with title: String, message: String, completion: (() -> Void)?)
+}
+
+protocol PostListBuildable: class {
+    func buildPostListBundle() -> (vc: PostListViewController, presenter: PostListPresenter)
+    func buildSortingBundle() -> (vc: SortingViewController, presenter: SortingPresenter)
+    func buildPostDetailBundle(with detailID: String) -> (vc: PostDetailViewController, presenter: PostDetailPresenter)
+}
+
+class PostListRouter: PostListRoutable, PostListBuildable {
     
 //    MARK: - Properties
     let navigationController: UINavigationController
@@ -53,6 +65,13 @@ class PostListRouter {
     func toPostDetailScreen(with detailID: String) {
         let(vc, _) = buildPostDetailBundle(with: detailID)
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showAlert(with title: String, message: String, completion: (() -> Void)?) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ок", style: .default, handler: nil)
+        alertVC.addAction(action)
+        navigationController.topViewController?.present(alertVC, animated: true, completion: completion)
     }
     
 }

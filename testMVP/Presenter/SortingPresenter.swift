@@ -47,7 +47,7 @@ class SortingPresenter: SortingPresenterProtocol {
     
 //    MARK: - Methods
     func showSortingItemsTrigger() {
-        fetchSortingItems { [weak self] in self?.sortingItems = $0 }
+        self.sortingItems = fetchSortingItems()
     }
     
     
@@ -63,27 +63,25 @@ class SortingPresenter: SortingPresenterProtocol {
             }
         }
         
-        saveSortingItems(newSortingItems) { [weak self] (items) in
-            guard let self = self, newSortingItems != self.sortingItems else { return }
-            self.sortingItems = newSortingItems
-            self.saveSelectedSorting(selectedItem)
-        }
+        _ = saveSortingItems(newSortingItems)
+        sortingItems = newSortingItems
+        saveSelectedSorting(selectedItem)
     }
     
-    private func fetchSortingItems(_ completion: @escaping ([SortingData]) -> Void) {
-        useCaseProvider.fetchSortingItems { completion($0) }
+    private func fetchSortingItems() -> [SortingData] {
+        useCaseProvider.fetchSortingItems()
     }
     
-    private func saveDefaultSortingItems(_ completion: @escaping ([SortingData]) -> Void) {
-        useCaseProvider.saveDefaultSortingItems() { completion($0) }
+    private func saveDefaultSortingItems() -> [SortingData] {
+        useCaseProvider.saveDefaultSortingItems()
     }
     
-    private func saveSortingItems(_ sortingItems: [SortingData], _ completion: @escaping ([SortingData]) -> Void) {
-        useCaseProvider.saveSortingItems(sortingItems) { completion($0) }
+    private func saveSortingItems(_ sortingItems: [SortingData]) -> [SortingData] {
+        useCaseProvider.saveSortingItems(sortingItems)
     }
     
     private func saveSelectedSorting(_ sorting: SortingData) {
-        useCaseProvider.saveSelectedSorting(sorting.sortingType, completion: nil)
+        useCaseProvider.saveSelectedSorting(sorting.sortingType)
     }
     
 }

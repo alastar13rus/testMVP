@@ -14,6 +14,7 @@ protocol PostListPresenterProtocol: class {
     
     func didFirstPageTriggerFired()
     func didNextPageTriggerFired()
+    func didRefreshTriggerFired()
     func presentSortingSettings()
     func didSelectItemTrigger(_ selectedItem: PostData)
     
@@ -31,7 +32,7 @@ class PostListPresenter: PostListPresenterProtocol {
 //    MARK: - Properties
     let useCaseProvider: PostUseCaseProvider
     let sortingUseCaseProvider: SortingUseCaseProvider
-    var router: PostListRouter?
+    var router: PostListRoutable?
     weak var delegate: PostListView?
     
     private(set) var posts = [PostData]()
@@ -62,7 +63,7 @@ class PostListPresenter: PostListPresenterProtocol {
         self.sortingUseCaseProvider = sortingUseCaseProvider
         self.delegate = delegate
         
-        self.didFirstPageTriggerFired()
+        self.sorting = sortingUseCaseProvider.fetchSelectedSorting()
     }
     
     
@@ -72,31 +73,20 @@ class PostListPresenter: PostListPresenterProtocol {
         guard !isFetching else { return }
         isFetching = true
         
-        sortingUseCaseProvider.fetchSelectedSorting { [weak self] (sorting) in
-            guard let self = self else { return }
-            
-            guard let sorting = sorting else {
-                
-                let request = Request(first: self.state.perPage, after: nil, orderBy: self.sorting)
-                self.useCaseProvider.fetchFirstPosts(request) { [weak self] in
-                    self?.handle($0, isReplace: true)
-                }
-                
-                return
-            }
-            
-            guard (self.sorting != sorting) || (self.sorting == sorting && self.posts.isEmpty) else {
-                self.isFetching = false
-                return
-            }
-            self.sorting = sorting
-            
-            let request = Request(first: self.state.perPage, after: nil, orderBy: sorting)
-            self.useCaseProvider.fetchFirstPosts(request) { [weak self] in
-                self?.handle($0, isReplace: true)
-            }
+        let selectedSorting = sortingUseCaseProvider.fetchSelectedSorting()
+        if (self.sorting == selectedSorting) && (!self.posts.isEmpty) {
+            self.isFetching = false
+            return
+        }
+        
+        if (self.sorting != selectedSorting) { self.sorting = selectedSorting }
+        
+        let request = Request(first: self.state.perPage, after: nil, orderBy: self.sorting)
+        self.useCaseProvider.fetchFirstPosts(request) { [weak self] in
+            self?.handle($0, isReplace: true)
         }
     }
+    
     
     func didNextPageTriggerFired() {
         guard !isFetching else { return }
@@ -113,6 +103,15 @@ class PostListPresenter: PostListPresenterProtocol {
         }
     }
     
+    func didRefreshTriggerFired() {
+        guard !isFetching else { return }
+        isFetching = true
+        let request = Request(first: self.state.perPage, after: nil, orderBy: self.sorting)
+        self.useCaseProvider.fetchFirstPosts(request) { [weak self] in
+            self?.handle($0, isReplace: true)
+        }
+    }
+    
     func presentSortingSettings() {
         router?.toSortingScreen()
     }
@@ -122,7 +121,7 @@ class PostListPresenter: PostListPresenterProtocol {
     }
     
     
-    private func handle(_ result: Result<PostListResponse, Error>, isReplace: Bool) {
+    func handle(_ result: Result<PostListResponse, Error>, isReplace: Bool) {
         switch result {
         case .success(let response):
             self.state.currentCursor = response.data.cursor
@@ -139,8 +138,25 @@ class PostListPresenter: PostListPresenterProtocol {
             }
             
         case .failure(let error):
-            print(error.localizedDescription)
+            router?.showAlert(with: "Error", message: error.localizedDescription) { [weak self] in
+                self?.isFetching = false
+            }
         }
     }
     
+    func removeAllPosts() {
+        self.posts.removeAll()
+    }
+    
+    func setupFetchingStatus(_ newStatus: Bool) {
+        self.isFetching = newStatus
+    }
+    
+    func setupState(newState: State) {
+        self.state = newState
+    }
+    
+    func setupSorting(_ newSorting: Sorting) {
+        self.sorting = newSorting
+    }
 }

@@ -22,84 +22,70 @@ class UserDefaultsProvider: SortingUseCaseProvider {
     private init() { }
     
 //    MARK: - Methods
-    func fetchSortingItems(_ completion: @escaping ([SortingData]) -> Void) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            
-            guard let self = self else { return }
-            
-            guard let data = self.userDefaults.data(forKey: KeyDefaults.sortingItems) else {
-                self.saveDefaultSortingItems { completion($0) }
-                return
-            }
-            
-            do {
-                let decodedSortingItems = try JSONDecoder().decode([SortingData].self, from: data)
-                
-                if decodedSortingItems.isEmpty { self.saveDefaultSortingItems { completion($0) } }
-                
-                DispatchQueue.main.sync { completion(decodedSortingItems) }
-                
-            } catch {
-                fatalError("Ошибка декодирования данных в UserDefaults")
-            }
-        }
-    }
-
-    
-    func fetchSelectedSorting(_ completion: @escaping (Sorting?) -> Void) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self else { return }
-            
-            guard let data = self.userDefaults.data(forKey: KeyDefaults.selectedSortingItem) else {
-                DispatchQueue.main.async { completion(nil) }
-                return
-            }
-            
-            do {
-                let decodedSortingItem = try JSONDecoder().decode(Sorting.self, from: data)
-                DispatchQueue.main.async { completion(decodedSortingItem) }
-            } catch {
-                fatalError("Ошибка декодирования данных в UserDefaults")
-            }
-        }
-    }
-    
-    func saveSortingItems(_ sortingItems: [SortingData], _ completion: @escaping ([SortingData]) -> Void) {
+    func fetchSortingItems() -> [SortingData] {
         
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self else { return }
-            do {
-                let encodedSortingItems = try JSONEncoder().encode(sortingItems)
-                self.userDefaults.set(encodedSortingItems, forKey: KeyDefaults.sortingItems)
-                DispatchQueue.main.async { completion(sortingItems) }
-            } catch {
-                fatalError("Ошибка при сохранении в UserDefaults")
-            }
+        guard let data = userDefaults.data(forKey: KeyDefaults.sortingItems) else {
+            return saveDefaultSortingItems()
+        }
+        
+        do {
+            let decodedSortingItems = try JSONDecoder().decode([SortingData].self, from: data)
+            if decodedSortingItems.isEmpty { return saveDefaultSortingItems() }
+            return decodedSortingItems
+            
+        } catch {
+            fatalError("Ошибка декодирования данных в UserDefaults")
         }
     }
     
-    func saveDefaultSortingItems(_ completion: @escaping ([SortingData]) -> Void) {
+    
+    
+    func fetchSelectedSorting() -> Sorting {
+        
+        guard let data = userDefaults.data(forKey: KeyDefaults.selectedSortingItem) else {
+            return saveDefaultSelectedSorting()
+        }
+        
+        do {
+            let decodedSortingItem = try JSONDecoder().decode(Sorting.self, from: data)
+            return decodedSortingItem
+        } catch {
+            fatalError("Ошибка декодирования данных в UserDefaults")
+        }
+    }
+    
+    func saveSortingItems(_ sortingItems: [SortingData]) -> [SortingData] {
+        
+        do {
+            let encodedSortingItems = try JSONEncoder().encode(sortingItems)
+            userDefaults.set(encodedSortingItems, forKey: KeyDefaults.sortingItems)
+            return sortingItems
+        } catch {
+            fatalError("Ошибка при сохранении в UserDefaults")
+        }
+    }
+    
+    func saveDefaultSortingItems() -> [SortingData] {
         let sortingItems: [SortingData] = [
             .init(sortingType: .createdAt, isSelected: true),
             .init(sortingType: .mostCommented, isSelected: false),
             .init(sortingType: .mostPopular, isSelected: false)
         ]
-        saveSortingItems(sortingItems) {  completion($0) }
+        return saveSortingItems(sortingItems)
     }
     
-    func saveSelectedSorting(_ sorting: Sorting, completion: (() -> Void)?) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self else { return }
-            
-            do {
-                let encodedSorting = try JSONEncoder().encode(sorting)
-                self.userDefaults.set(encodedSorting, forKey: KeyDefaults.selectedSortingItem)
-                completion?()
-            } catch {
-                fatalError("Ошибка при сохранении в UserDefaults")
-            }
-        }
+    func saveDefaultSelectedSorting() -> Sorting {
+        return .createdAt
+    }
+    
+    func saveSelectedSorting(_ sorting: Sorting) {
         
+        do {
+            let encodedSorting = try JSONEncoder().encode(sorting)
+            userDefaults.set(encodedSorting, forKey: KeyDefaults.selectedSortingItem)
+        } catch {
+            fatalError("Ошибка при сохранении в UserDefaults")
+        }
     }
 }
 

@@ -11,12 +11,13 @@ protocol SortingUseCaseProvider: class {
     
     typealias Cursor = String
     
-    func fetchSortingItems(_ completion: @escaping ([SortingData]) -> Void)
-    func fetchSelectedSorting(_ completion: @escaping (Sorting?) -> Void)
+    func fetchSortingItems() -> [SortingData]
+    func fetchSelectedSorting() -> Sorting
     
-    func saveSelectedSorting(_ sorting: Sorting, completion: (() -> Void)?)
-    func saveSortingItems(_ sortingItems: [SortingData], _ completion: @escaping ([SortingData]) -> Void)
+    func saveSelectedSorting(_ sorting: Sorting)
+    func saveDefaultSelectedSorting() -> Sorting
+    func saveSortingItems(_ sortingItems: [SortingData]) -> [SortingData]
     
-    func saveDefaultSortingItems(_ completion: @escaping ([SortingData]) -> Void)
+    func saveDefaultSortingItems() -> [SortingData]
 
 }
