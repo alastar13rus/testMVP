@@ -204,11 +204,11 @@ extension PostListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let item = presenter.posts[indexPath.row]
         
-        var textHeight: CGFloat = 0
-        if let textContent = item.textContent {
-            textHeight = tableView.calculateTextLabelHeight(withContent: textContent, font: UIFont.systemFont(ofSize: 14))
+        var textBlockHeight: CGFloat = 0
+        if let textBlockContent = item.textContent {
+            textBlockHeight = tableView.calculateTextLabelHeight(withContent: textBlockContent, font: UIFont.systemFont(ofSize: 14), contentBlockWidth: tableView.bounds.width - CGFloat(2 * 12))
         }
-        return textHeight + CGFloat(item.cellHeaderHeight + item.cellContentHeight + item.cellFooterHeight + item.cellPaddings)
+        return textBlockHeight + CGFloat(item.cellHeaderHeight + item.cellContentHeight + item.cellFooterHeight + item.cellPaddings)
 
     }
     
