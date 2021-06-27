@@ -167,15 +167,8 @@ extension PostListViewController: UITableViewDataSource {
         let cellType = presenter.posts[indexPath.row].type
         
         switch cellType {
-        case .plain:
+        case .plain, .plainCover:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostPlainTableViewCell.self)) as? PostPlainTableViewCell else { return UITableViewCell() }
-            cell.indexPath = indexPath
-            cell.tag = indexPath.row
-            cell.postData = presenter.posts[indexPath.row]
-            return cell
-            
-        case .plainCover:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostPlainCoverTableViewCell.self)) as? PostPlainCoverTableViewCell else { return UITableViewCell() }
             cell.indexPath = indexPath
             cell.tag = indexPath.row
             cell.postData = presenter.posts[indexPath.row]
@@ -204,11 +197,11 @@ extension PostListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let item = presenter.posts[indexPath.row]
         
-        var textHeight: CGFloat = 0
-        if let textContent = item.textContent {
-            textHeight = tableView.calculateTextLabelHeight(withContent: textContent, font: UIFont.systemFont(ofSize: 14))
+        var textBlockHeight: CGFloat = 0
+        if let textBlockContent = item.textContent {
+            textBlockHeight = tableView.calculateTextLabelHeight(withContent: textBlockContent, font: UIFont.systemFont(ofSize: 14), contentBlockWidth: tableView.bounds.width - CGFloat(2 * 12))
         }
-        return textHeight + CGFloat(item.cellHeaderHeight + item.cellContentHeight + item.cellFooterHeight + item.cellPaddings)
+        return textBlockHeight + CGFloat(item.cellHeaderHeight + item.cellContentHeight + item.cellFooterHeight + item.cellPaddings)
 
     }
     

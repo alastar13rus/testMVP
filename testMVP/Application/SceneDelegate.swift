@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let window = window else { return }
         
         let navigationController = UINavigationController()
+        navigationController.view.backgroundColor = .white
         let router = PostListRouter(navigationController: navigationController)
         let (viewController, _) = router.buildPostListBundle()
         navigationController.viewControllers = [viewController]

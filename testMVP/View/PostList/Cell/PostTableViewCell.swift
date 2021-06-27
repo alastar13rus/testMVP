@@ -45,9 +45,12 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    let authorImageView: UIImageView = {
-        let iv = UIImageView()
+    let authorImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.layer.cornerRadius = 10
+        iv.layer.borderWidth = 5
+        iv.layer.borderColor = UIColor.systemGray6.cgColor
+//        iv.backgroundColor = .systemGray6
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -133,7 +136,7 @@ class PostTableViewCell: UITableViewCell {
     private func setupUI() {
         backgroundColor = .white
         selectionStyle = .none
-        accessoryType = .disclosureIndicator
+//        accessoryType = .disclosureIndicator
         setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
     
@@ -206,6 +209,7 @@ class PostTableViewCell: UITableViewCell {
         setupConstraints(data)
         
         authorNameLabel.text = data.authorName
+        authorImageView.layer.cornerRadius = CGFloat(data.cellHeaderHeight) / 2
         textContentLabel.text = data.textContent
         createdAtLabel.text = data.createdAtString
         updatedAtLabel.text = data.updatedAtString
@@ -214,10 +218,9 @@ class PostTableViewCell: UITableViewCell {
         postTypeLabel.text = data.typeString
         postContents.text = data.contentsString
         
-        authorImageView.setImage(with: data.imageContentURL) { [weak self] (success) in
-            if !success {
-                self?.authorImageView.image = data.authorGender.getImage()
-            }
+        authorImageView.setImage(data.imageContentURL) { [weak self] succeeded in
+            guard let self = self, !succeeded else { return }
+            self.authorImageView.image = data.authorGender.getImage()
         }
     }
 }

@@ -46,7 +46,7 @@ struct PostDetailData {
         return " (Изм: \(updatedAtDate.toTimeString()))"
     }
     
-    var cellContentHeight: Int {
+    var cellContentHeight: Float {
         ContentVariantHeight.calcContentHeight(contents)
     }
     
@@ -81,7 +81,7 @@ struct PostDetailData {
                 images.append(content.medium?.url ?? content.small?.url)
             
             case .imageGif(let content):
-                imageGif = content.medium?.url ?? content.small?.url
+                imageGif = content.medium?.url ?? content.small?.url ?? content.extraSmall?.url
             
             case .audio(let content):
                 audio = (url: content.url,

@@ -17,7 +17,6 @@ class PostListTableView: UITableView {
         self.separatorInset = .init(top: 12, left: 12, bottom: 12, right: 12)
         self.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
         self.register(PostPlainTableViewCell.self, forCellReuseIdentifier: String(describing: PostPlainTableViewCell.self))
-        self.register(PostPlainCoverTableViewCell.self, forCellReuseIdentifier: String(describing: PostPlainCoverTableViewCell.self))
         self.register(PostAudioCoverTableViewCell.self, forCellReuseIdentifier: String(describing: PostAudioCoverTableViewCell.self))
         self.register(PostVideoTableViewCell.self, forCellReuseIdentifier: String(describing: PostVideoTableViewCell.self))
         self.translatesAutoresizingMaskIntoConstraints = false
