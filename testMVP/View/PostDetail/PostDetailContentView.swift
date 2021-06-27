@@ -40,8 +40,8 @@ class PostDetailContentView: UIView {
     }()
     
     
-    let authorImageView: UIImageView = {
-        let view = UIImageView()
+    let authorImageView: CustomImageView = {
+        let view = CustomImageView()
         view.layer.cornerRadius = 50
         view.clipsToBounds = true
         view.layer.borderColor = UIColor.systemGray5.cgColor
@@ -243,10 +243,9 @@ class PostDetailContentView: UIView {
         updatedAtLabel.text = data.updatedAtString
         tagsLabel.text = data.tagsContent
         
-        authorImageView.setImage(with: data.imageContentURL) { [weak self] (success) in
-            if !success {
-                self?.authorImageView.image = data.authorGender.getImage()
-            }
+        authorImageView.setImage(data.imageContentURL) { [weak self] succeeded in
+            guard let self = self, !succeeded else { return }
+            self.authorImageView.image = data.authorGender.getImage()
         }
     }
     
@@ -294,6 +293,9 @@ class PostDetailContentView: UIView {
     
     func setupConstraints() {
         
+        let textContentLabelBottomConstraint: NSLayoutConstraint = textContentLabel.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor, constant: -12)
+        textContentLabelBottomConstraint.priority = UILayoutPriority(250)
+        
         NSLayoutConstraint.activate([
             authorContentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             authorContentView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
@@ -302,7 +304,8 @@ class PostDetailContentView: UIView {
             postContentView.topAnchor.constraint(equalTo: authorContentView.bottomAnchor, constant: 12),
             postContentView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
             postContentView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
-            
+            postContentView.widthAnchor.constraint(equalToConstant: 350),
+
             socialContentStackView.topAnchor.constraint(equalTo: postContentView.bottomAnchor, constant: 12),
             socialContentStackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
             socialContentStackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
@@ -329,6 +332,8 @@ class PostDetailContentView: UIView {
             textContentLabel.topAnchor.constraint(equalTo: postContentView.topAnchor),
             textContentLabel.leftAnchor.constraint(equalTo: postContentView.leftAnchor),
             textContentLabel.rightAnchor.constraint(equalTo: postContentView.rightAnchor),
+            textContentLabelBottomConstraint,
+            
             textContentLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 20),
 
             

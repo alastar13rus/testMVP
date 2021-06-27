@@ -11,8 +11,8 @@ import AVKit
 class PostVideoTableViewCell: PostTableViewCell {
     
 //    MARK: - Properties
-    let previewImageView: UIImageView = {
-        let iv = UIImageView()
+    let previewImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
@@ -43,8 +43,12 @@ class PostVideoTableViewCell: PostTableViewCell {
         setupConstraints(data)
         
         videoDurationLabel.text = data.videoContent?.duration ?? ""
-        previewImageView.setImage(with: data.videoContent?.previewImageURL)
         
+        previewImageView.setImage(data.videoContent?.previewImageURL) { [weak self] _ in
+            guard let self = self else { return }
+            guard self.tag != self.indexPath.row else { return }
+            self.previewImageView.image = nil
+        }
     }
     
     override func setupHierarhy() {
@@ -61,7 +65,7 @@ class PostVideoTableViewCell: PostTableViewCell {
             previewImageView.topAnchor.constraint(equalTo: textContentLabel.bottomAnchor, constant: 12),
             previewImageView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 12),
             previewImageView.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -12),
-            previewImageView.heightAnchor.constraint(equalToConstant: 100),
+            previewImageView.heightAnchor.constraint(equalToConstant: 200),
             previewImageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor),
             
             videoDurationLabel.centerXAnchor.constraint(equalTo: previewImageView.centerXAnchor),

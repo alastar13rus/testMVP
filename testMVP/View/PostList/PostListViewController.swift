@@ -167,15 +167,8 @@ extension PostListViewController: UITableViewDataSource {
         let cellType = presenter.posts[indexPath.row].type
         
         switch cellType {
-        case .plain:
+        case .plain, .plainCover:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostPlainTableViewCell.self)) as? PostPlainTableViewCell else { return UITableViewCell() }
-            cell.indexPath = indexPath
-            cell.tag = indexPath.row
-            cell.postData = presenter.posts[indexPath.row]
-            return cell
-            
-        case .plainCover:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostPlainCoverTableViewCell.self)) as? PostPlainCoverTableViewCell else { return UITableViewCell() }
             cell.indexPath = indexPath
             cell.tag = indexPath.row
             cell.postData = presenter.posts[indexPath.row]

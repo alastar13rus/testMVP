@@ -8,15 +8,15 @@
 import Foundation
 
 struct ContentVariantHeight {
-    static let textHeight = 0
-    static let imageHeight = 100
-    static let imageGifHeight = 100
-    static let audioHeight = 0
-    static let videoHeight = 100
-    static let tagsHeight = 0
+    static let textHeight: Float = 0
+    static let imageHeight: Float = 200
+    static let imageGifHeight: Float = 200
+    static let audioHeight: Float = 0
+    static let videoHeight: Float = 200
+    static let tagsHeight: Float = 0
     
-    static func calcContentHeight(_ contents: [PostContent]) -> Int {
-        var height = 0
+    static func calcContentHeight(_ contents: [PostContent]) -> Float {
+        var height: Float = 0.0
         var imageCount = 0
         contents.forEach {
             switch $0 {
@@ -71,17 +71,17 @@ struct PostData {
         return " (Изм: \(updatedAtDate.toTimeString()))"
     }
     
-    var cellContentHeight: Int {
+    var cellContentHeight: Float {
         ContentVariantHeight.calcContentHeight(contents)
     }
     
-    var cellFooterHeight: Int {
+    var cellFooterHeight: Float {
         updatedAtString == "" ? 20: 48
     }
     
-    var cellHeaderHeight: Int { 72 }
+    var cellHeaderHeight: Float { 72 }
     
-    var cellPaddings: Int { 48 }
+    var cellPaddings: Float { 48 }
     
     init(_ model: Post) {
         self.id = model.id

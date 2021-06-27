@@ -15,8 +15,8 @@ class PostDetailVideoView: PostDetailContentView {
     var player: AVPlayer!
 //    var videoPlayerView: UIView!
     
-    let previewImageView: UIImageView = {
-        let iv = UIImageView()
+    let previewImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.backgroundColor = .systemGray5
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -43,7 +43,7 @@ class PostDetailVideoView: PostDetailContentView {
     override func configure(with data: PostDetailData) {
         super.configure(with: data)
         
-        previewImageView.setImage(with: data.videoContent?.previewImageURL)
+        previewImageView.setImage(data.videoContent?.previewImageURL)
         
         setupPlayer(with: data)
         setupPlayerVC(player)
@@ -64,6 +64,7 @@ class PostDetailVideoView: PostDetailContentView {
             previewImageView.leftAnchor.constraint(equalTo: postContentView.leftAnchor),
             previewImageView.rightAnchor.constraint(equalTo: postContentView.rightAnchor),
             previewImageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor),
+            previewImageView.heightAnchor.constraint(equalToConstant: 200),
             
             playButton.centerXAnchor.constraint(equalTo: postContentView.centerXAnchor),
             playButton.centerYAnchor.constraint(equalTo: postContentView.centerYAnchor),

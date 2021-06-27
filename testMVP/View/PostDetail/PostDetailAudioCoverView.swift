@@ -13,8 +13,8 @@ class PostDetailAudioCoverView: PostDetailContentView {
     //    MARK: - Properties
     var player: AVPlayer!
     
-    let audioCoverImageView: UIImageView = {
-        let iv = UIImageView()
+    let audioCoverImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.backgroundColor = .systemGray5
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -48,7 +48,7 @@ class PostDetailAudioCoverView: PostDetailContentView {
     override func configure(with data: PostDetailData) {
         super.configure(with: data)
         
-        audioCoverImageView.setImage(with: data.imageContentURL)
+        audioCoverImageView.setImage(data.imageContentURL)
         
         setupPlayer(with: data)
         setupSlider(with: data)
@@ -69,7 +69,8 @@ class PostDetailAudioCoverView: PostDetailContentView {
             audioCoverImageView.topAnchor.constraint(equalTo: postContentView.topAnchor),
             audioCoverImageView.leftAnchor.constraint(equalTo: postContentView.leftAnchor),
             audioCoverImageView.rightAnchor.constraint(equalTo: postContentView.rightAnchor),
-            
+            audioCoverImageView.heightAnchor.constraint(equalToConstant: 200),
+
             playButton.centerXAnchor.constraint(equalTo: audioCoverImageView.centerXAnchor),
             playButton.centerYAnchor.constraint(equalTo: audioCoverImageView.centerYAnchor),
             playButton.widthAnchor.constraint(equalToConstant: 48),

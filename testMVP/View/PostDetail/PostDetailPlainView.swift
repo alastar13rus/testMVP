@@ -12,65 +12,61 @@ class PostDetailPlainView: PostDetailContentView {
 //    MARK: - Properties
         
     lazy var imageContentConstraints: [NSLayoutConstraint] = {
-        let imageRightConstraint: NSLayoutConstraint = imageContentImageView.rightAnchor.constraint(equalTo: postContentView.rightAnchor)
-        imageRightConstraint.priority = UILayoutPriority(rawValue: 999)
+        let imageBottomConstraint: NSLayoutConstraint = imageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor)
+        imageBottomConstraint.priority = UILayoutPriority(rawValue: 999)
         
         let constraints: [NSLayoutConstraint] = [
-            imageContentImageView.topAnchor.constraint(equalTo: textContentLabel.bottomAnchor, constant: 12),
-            imageContentImageView.leftAnchor.constraint(equalTo: postContentView.leftAnchor),
-            imageRightConstraint,
-            imageContentImageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor),
+            imageView.topAnchor.constraint(equalTo: textContentLabel.bottomAnchor, constant: 12),
+            imageView.leftAnchor.constraint(equalTo: postContentView.leftAnchor),
+            imageView.rightAnchor.constraint(equalTo: postContentView.rightAnchor),
+            imageBottomConstraint,
         ]
         return constraints
     }()
     
     lazy var secondImageContentConstraints: [NSLayoutConstraint] = {
         let constraints: [NSLayoutConstraint] = [
-            secondImageContentImageView.topAnchor.constraint(equalTo: textContentLabel.bottomAnchor, constant: 12),
-            secondImageContentImageView.leftAnchor.constraint(equalTo: imageContentImageView.rightAnchor, constant: 12),
-            secondImageContentImageView.rightAnchor.constraint(equalTo: postContentView.rightAnchor),
-            secondImageContentImageView.widthAnchor.constraint(equalTo: imageContentImageView.widthAnchor),
-            secondImageContentImageView.heightAnchor.constraint(equalTo: imageContentImageView.heightAnchor),
-            secondImageContentImageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor),
+            secondImageView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 12),
+            secondImageView.leftAnchor.constraint(equalTo: postContentView.leftAnchor),
+            secondImageView.rightAnchor.constraint(equalTo: postContentView.rightAnchor),
+            secondImageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor),
         ]
         return constraints
     }()
     
-    lazy var imageGifContentConstraints: [NSLayoutConstraint] = {
+    lazy var gifContentConstraints: [NSLayoutConstraint] = {
         let constraints: [NSLayoutConstraint] = [
-            imageGifContentImageView.topAnchor.constraint(equalTo: textContentLabel.bottomAnchor, constant: 12),
-            imageGifContentImageView.centerXAnchor.constraint(equalTo: postContentView.centerXAnchor),
-            imageGifContentImageView.widthAnchor.constraint(equalTo: imageGifContentImageView.heightAnchor),
-            imageGifContentImageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor),
+            gifImageView.topAnchor.constraint(equalTo: textContentLabel.bottomAnchor, constant: 12),
+            gifImageView.centerXAnchor.constraint(equalTo: postContentView.centerXAnchor),
+            gifImageView.widthAnchor.constraint(equalTo: gifImageView.heightAnchor),
+            gifImageView.heightAnchor.constraint(equalToConstant: 200),
+            gifImageView.bottomAnchor.constraint(equalTo: postContentView.bottomAnchor),
         ]
         return constraints
     }()
     
-    let imageContentImageView: UIImageView = {
-        let iv = UIImageView()
+    lazy var imageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFill
-//        iv.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-//        iv.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        iv.contentMode = .scaleAspectFit
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
-    let secondImageContentImageView: UIImageView = {
-        let iv = UIImageView()
+    let secondImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFill
-//        iv.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        iv.contentMode = .scaleAspectFit
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
-    let imageGifContentImageView: UIImageView = {
-        let iv = UIImageView()
+    let gifImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
@@ -87,28 +83,29 @@ class PostDetailPlainView: PostDetailContentView {
         super.configure(with: data)
         
         
-        imageContentImageView.setImage(with: data.imageContentURL) { [weak self] (isSuccess) in
-            guard let self = self, isSuccess else { return }
+        imageView.setImage(data.imageContentURL) { [weak self] succeeded in
+            guard let self = self, succeeded else { return }
             
+            self.postContentView.addSubview(self.imageView)
+            NSLayoutConstraint.activate(self.imageContentConstraints)
+            let ratio = self.imageView.image!.size.height / self.imageView.image!.size.width
+            self.imageView.heightAnchor.constraint(equalTo: self.imageView.widthAnchor, multiplier: ratio).isActive = true
             
-            self.secondImageContentImageView.setImage(with: data.secondImageContentURL) { [weak self] (isSuccess) in
-                guard let self = self else { return }
-                if isSuccess {
-                    self.postContentView.addSubview(self.imageContentImageView)
-                    self.postContentView.addSubview(self.secondImageContentImageView)
-                    NSLayoutConstraint.activate(self.imageContentConstraints)
-                    NSLayoutConstraint.activate(self.secondImageContentConstraints)
-                } else {
-                    self.postContentView.addSubview(self.imageContentImageView)
-                    NSLayoutConstraint.activate(self.imageContentConstraints)
-                }
+            self.secondImageView.setImage(data.secondImageContentURL) { [weak self] succeeded in
+                guard let self = self, succeeded else { return }
+                
+                self.postContentView.addSubview(self.secondImageView)
+                NSLayoutConstraint.activate(self.secondImageContentConstraints)
+                let ratio = self.secondImageView.image!.size.height / self.secondImageView.image!.size.width
+                self.secondImageView.heightAnchor.constraint(equalTo: self.secondImageView.widthAnchor, multiplier: ratio).isActive = true
             }
         }
         
-        imageGifContentImageView.setImage(with: data.imageGifContentURL) { [weak self] (isSuccess) in
-            guard let self = self, isSuccess else { return }
-            self.postContentView.addSubview(self.imageGifContentImageView)
-            NSLayoutConstraint.activate(self.imageGifContentConstraints)
+        gifImageView.setImage(data.imageGifContentURL) { [weak self] succeeded in
+            guard let self = self, succeeded else { return }
+            
+            self.postContentView.addSubview(self.gifImageView)
+            NSLayoutConstraint.activate(self.gifContentConstraints)
         }
     }
 }
