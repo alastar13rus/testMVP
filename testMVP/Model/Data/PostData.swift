@@ -113,9 +113,10 @@ struct PostData {
                          duration: "Продолжительность: \(ceil(content.duration * 100) / 100) сек")
             
             case .video(let content):
+                let previewImage = content.previewImage.data.medium?.url ?? content.previewImage.data.small?.url ?? content.previewImage.data.extraSmall?.url
                 video = (url: content.url,
                          duration: "Продолжительность: \(ceil(content.duration * 100) / 100) сек",
-                         previewImageURL: content.previewImage.data.medium?.url)
+                         previewImageURL: previewImage)
             
             case .tags(let content):
                 tags = content.values.joined(separator: " ,")
